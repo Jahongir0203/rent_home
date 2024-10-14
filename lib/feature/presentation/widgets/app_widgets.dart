@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,7 +12,7 @@ import '../../../core/theme/app_colors.dart';
 Widget _baseText({
   required String text,
   double? fontSize,
-  Color? color=AppColors.dark,
+  Color? color,
   FontWeight fontWeight = FontWeight.normal,
   int maxLines = 1,
   bool autoResize = false,
@@ -28,7 +27,6 @@ Widget _baseText({
     fontWeight: fontWeight,
     height: height,
     fontFamily: "avenirnextcyr-light",
-
   );
   if (richText) {
     return SuperRichText(
@@ -37,7 +35,7 @@ Widget _baseText({
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
-       othersMarkers: othersMarkers,
+      othersMarkers: othersMarkers,
     );
   }
   if (autoResize) {
@@ -207,5 +205,4 @@ class AppWidgets {
       textAlign: TextAlign.center,
     );
   }
-
 }

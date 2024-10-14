@@ -1,5 +1,22 @@
 import 'package:flutter/material.dart';
 
+double height = 0.0;
+double width = 0.0;
+
+extension AppSizeUtils on int {
+  SizedBox getH() {
+    return SizedBox(
+      height: (this / 667) * height,
+    );
+  }
+
+  SizedBox getW() {
+    return SizedBox(
+      width: (this / 375) * width,
+    );
+  }
+}
+
 extension WidgetPaddingExtension on Widget {
   Widget paddingAll(double padding) => Padding(
         padding: EdgeInsets.all(padding),
