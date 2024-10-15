@@ -26,4 +26,7 @@ class AppColors {
   static Color c858585 = const Color(0xFF858585);
   static Color linerGradient1 = const Color(0xFF0ADAFB);
   static Color linerGradient2 = const Color(0xFF0A8ED9);
+  static Color cFA0E0E = const Color(0xFFFA0E0E);
+  static Color cD7D7D7 = const Color(0xFFD7D7D7);
+  static Color c0A8ED9 = const Color(0xFF0A8ED9);
 }

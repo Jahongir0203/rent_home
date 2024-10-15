@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
+import 'package:rent_home/core/router/app_routes.dart';
 import 'package:rent_home/core/theme/theme.dart';
 import 'package:rent_home/feature/presentation/pages/global_widgets/main_global_button.dart';
 import 'package:rent_home/feature/presentation/pages/sign_up_page/widgets/input_password_field.dart';
@@ -94,8 +95,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () {},
                 ),
                 const Spacer(),
-                const MainGlobalButton(
+                MainGlobalButton(
                   title: "Sign Up",
+                  onTap: () => Navigator.pushNamed(context, Routes.homePage),
                 ),
                 const Spacer(),
                 Row(
@@ -109,7 +111,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       onPressed: () {},
                       child: Text(
                         "Sign In",
-                        style: AppTextStyle.w500H13.copyWith(color: AppColors.linerGradient2),
+                        style: AppTextStyle.w500H13
+                            .copyWith(color: AppColors.linerGradient2),
                       ),
                     ),
                   ],
