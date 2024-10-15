@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/drawer/home_drawer.dart';
 import 'package:rent_home/feature/presentation/pages/home_page/widgets/app_bar_item.dart';
 import 'package:rent_home/feature/presentation/pages/home_page/widgets/best_for/best_for_item.dart';
 import 'package:rent_home/feature/presentation/pages/home_page/widgets/category_item.dart';
@@ -11,6 +12,7 @@ import 'package:rent_home/feature/presentation/pages/home_page/widgets/notifacti
 import 'package:rent_home/feature/presentation/pages/home_page/widgets/on_tap_button.dart';
 import 'package:rent_home/feature/presentation/pages/home_page/widgets/search_item.dart';
 import 'package:rent_home/feature/presentation/pages/home_page/widgets/show_title.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const HomeDrawer(),
       appBar: AppBar(
         title: const AppBarItem(),
         actions: [
@@ -81,13 +83,16 @@ class _HomePageState extends State<HomePage> {
                 children: List.generate(
                   5,
                   (index) {
-                    return const Stack(
-                      children: [
-                        NearFromItem(),
-                        NearFromItemOpacity(),
-                        NearFromItemTitle(),
-                      ],
-                    ).paddingOnly(right: 20.w);
+                    return ZoomTapAnimation(
+                      onTap: () {},
+                      child: const Stack(
+                        children: [
+                          NearFromItem(),
+                          NearFromItemOpacity(),
+                          NearFromItemTitle(),
+                        ],
+                      ).paddingOnly(right: 20.w),
+                    );
                   },
                 ),
               ),
@@ -101,7 +106,9 @@ class _HomePageState extends State<HomePage> {
             ...List.generate(
               6,
               (index) {
-                return const BestForItem();
+                return BestForItem(
+                  onTap: () {},
+                );
               },
             ),
           ],
