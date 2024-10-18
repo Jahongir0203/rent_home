@@ -9,11 +9,9 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashInitialState()) {
     on<SplashLoadedEvent>((event, emit) async {
       await Future.delayed(
-        const Duration(seconds: 3),
+        const Duration(seconds: 4),
         () {
-          emit(
-            SplashSuccessState(),
-          );
+          emit(SplashSuccessState());
         },
       );
     });

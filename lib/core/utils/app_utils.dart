@@ -18,6 +18,5 @@ sealed class AppUtils {
 
   /// Divider
     static const  kDivider = Divider(
-    color: AppColors.otpColor,
   );
 }

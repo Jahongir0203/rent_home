@@ -27,6 +27,7 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
     var response = await client.get(
       Uri.parse(url),
       headers: {"Content-type": "application/json"},
+
     );
 
     if (response.statusCode == 200) {
