@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
 
-class NearFromItemTitle extends StatelessWidget {
-  const NearFromItemTitle({
+class HomeNearItemTitle extends StatelessWidget {
+  const HomeNearItemTitle({
     super.key,
   });
 

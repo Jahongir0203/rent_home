@@ -9,17 +9,19 @@ class MainGlobalButton extends StatelessWidget {
     super.key,
     this.onTap,
     required this.title,
+    required this.high,
   });
 
   final Function()? onTap;
   final String title;
+  final double high;
   @override
   Widget build(BuildContext context) {
     return ZoomTapAnimation(
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        height: 56.h,
+        height: high,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           gradient: LinearGradient(

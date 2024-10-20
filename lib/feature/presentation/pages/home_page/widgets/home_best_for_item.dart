@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/best_for/widgets/best_for_title.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_best_for_title.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-class BestForItem extends StatelessWidget {
-  const BestForItem({
+class HomeBestForItem extends StatelessWidget {
+  const HomeBestForItem({
     super.key,
     required this.onTap,
   });
@@ -30,7 +30,7 @@ class BestForItem extends StatelessWidget {
             ),
           ),
           20.getW(),
-          const BestForTitle(),
+          const HomeBestForTitle(),
         ],
       ).paddingSymmetric(vertical: 10.h),
     );

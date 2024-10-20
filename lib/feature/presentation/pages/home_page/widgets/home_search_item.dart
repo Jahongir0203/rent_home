@@ -6,8 +6,8 @@ import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_svg.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
 
-class SearchItem extends StatelessWidget {
-  const SearchItem({
+class HomeSearchItem extends StatelessWidget {
+  const HomeSearchItem({
     super.key,
     required this.onChangeValue,
   });

@@ -6,13 +6,13 @@ import 'package:rent_home/core/extentions/padding_extension.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_svg.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/data/models/drawer_model.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/drawer/widgets/dialogs/dialog_drawer.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/open_launcher/open_launcher.dart';
+import 'package:rent_home/feature/data/models/drawer_model.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_dialog_drawer.dart';
+import 'package:rent_home/feature/presentation/widgets/open_launcher.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-class DrawerItem extends StatelessWidget {
-  const DrawerItem({
+class HomeDrawerItem extends StatelessWidget {
+  const HomeDrawerItem({
     super.key,
     required this.item,
   });
@@ -30,7 +30,7 @@ class DrawerItem extends StatelessWidget {
                   OpenLauncher.onOpenLauncher(item.url!);
                 }
               : () {
-                  dialogDrawer(context);
+                  homeDialogDrawer(context);
                 },
       child: Container(
         width: width * 0.5,

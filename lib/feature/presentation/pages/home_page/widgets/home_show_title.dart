@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
 
-class ShowTitle extends StatelessWidget {
-  const ShowTitle({
+class HomeShowTitle extends StatelessWidget {
+  const HomeShowTitle({
     super.key,
     required this.onTap,
     required this.title,

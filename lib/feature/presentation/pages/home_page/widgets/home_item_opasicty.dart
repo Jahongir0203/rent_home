@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 
-class NearFromItemOpacity extends StatelessWidget {
-  const NearFromItemOpacity({
+class HomeItemOpasicty extends StatelessWidget {
+  const HomeItemOpasicty({
     super.key,
   });
 

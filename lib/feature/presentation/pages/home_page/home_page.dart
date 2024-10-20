@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/drawer/home_drawer.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/app_bar_item.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/best_for/best_for_item.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/category_item.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/item_opasicty.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/near_from_item.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/near_item_title.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/notifaction_icon.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/on_tap_button.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/search_item.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/widgets/show_title.dart';
+import 'package:rent_home/core/router/app_routes.dart';
+import 'package:rent_home/feature/data/models/category_model.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_app_bar_item.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_best_for_item.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_category_tab_item.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_drawer.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_item_opasicty.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_near_from_item.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_near_item_title.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_notifaction_icon.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_on_tap_button.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_search_item.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_show_title.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,16 +23,27 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int changeValue = 0;
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: categories.length, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: const HomeDrawer(),
       appBar: AppBar(
-        title: const AppBarItem(),
+        title: const HomeAppBarItem(),
         actions: [
-          NotifacationIcon(onTap: () {}),
+          HomeNotifacationIcon(onTap: () {
+            Navigator.pushNamed(context, Routes.notifacation);
+          }),
         ],
       ),
       body: SingleChildScrollView(
@@ -44,35 +57,25 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   SizedBox(
                     width: width * 0.7,
-                    child: SearchItem(
+                    child: HomeSearchItem(
                       onChangeValue: (value) {},
                     ),
                   ),
-                  OnTapButton(
-                    onTap: () {},
+                  HomeOnTapButton(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.settings);
+                    },
                   ),
                 ],
               ),
             ),
             14.getH(),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                  6,
-                  (index) {
-                    return CategoryItem(
-                        onTap: () {
-                          changeValue = index;
-                          setState(() {});
-                        },
-                        isSelectItem: changeValue == index);
-                  },
-                ),
-              ),
+            HomeCategoryTabItem(
+              tabController: _tabController,
+              onChangeValue: (value) {},
             ),
             14.getH(),
-            ShowTitle(
+            HomeShowTitle(
               onTap: () {},
               title: "Near from you",
             ),
@@ -84,12 +87,14 @@ class _HomePageState extends State<HomePage> {
                   5,
                   (index) {
                     return ZoomTapAnimation(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.detailProductPage);
+                      },
                       child: const Stack(
                         children: [
-                          NearFromItem(),
-                          NearFromItemOpacity(),
-                          NearFromItemTitle(),
+                          HomeNearFromItem(),
+                          HomeItemOpasicty(),
+                          HomeNearItemTitle(),
                         ],
                       ).paddingOnly(right: 20.w),
                     );
@@ -98,7 +103,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             14.getH(),
-            ShowTitle(
+            HomeShowTitle(
               onTap: () {},
               title: "Best for you",
             ),
@@ -106,8 +111,10 @@ class _HomePageState extends State<HomePage> {
             ...List.generate(
               6,
               (index) {
-                return BestForItem(
-                  onTap: () {},
+                return HomeBestForItem(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.detailProductPage);
+                  },
                 );
               },
             ),

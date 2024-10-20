@@ -6,8 +6,8 @@ import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_svg.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
 
-class NearFromItem extends StatelessWidget {
-  const NearFromItem({
+class HomeNearFromItem extends StatelessWidget {
+  const HomeNearFromItem({
     super.key,
   });
 

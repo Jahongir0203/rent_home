@@ -34,24 +34,24 @@ class OtpAppBarWidget extends StatelessWidget {
       ),
       title: title != null
           ? AppWidgets.textLocale(
-        text: tr(title!),
-        fontSize: 17.sp,
-        fontWeight: FontWeight.normal,
-        color: AppColors.dark,
-      )
+              text: tr(title!),
+              fontSize: 17.sp,
+              fontWeight: FontWeight.normal,
+              color: AppColors.dark,
+            )
           : null,
       actions: actionsTxt != null
           ? [
-        TextButton(
-          onPressed: onTap,
-          child: AppWidgets.textLocale(
-            text: actionsTxt!,
-            fontSize: 17.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColors.blue,
-          ),
-        ),
-      ]
+              TextButton(
+                onPressed: onTap,
+                child: AppWidgets.textLocale(
+                  text: actionsTxt!,
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.blue,
+                ),
+              ),
+            ]
           : null,
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rent_home/core/theme/theme.dart';
 
-Future<dynamic> dialogDrawer(BuildContext context) {
+Future<dynamic> homeDialogDrawer(BuildContext context) {
   return showDialog(
     context: context,
     builder: (context) {

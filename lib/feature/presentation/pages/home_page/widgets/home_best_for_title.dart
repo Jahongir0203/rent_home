@@ -5,8 +5,8 @@ import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_svg.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
 
-class BestForTitle extends StatelessWidget {
-  const BestForTitle({
+class HomeBestForTitle extends StatelessWidget {
+  const HomeBestForTitle({
     super.key,
   });
 

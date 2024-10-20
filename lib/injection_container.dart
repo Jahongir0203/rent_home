@@ -6,5 +6,4 @@ final sl = GetIt.instance;
 
 void init() {
   sl.registerSingleton<SplashBloc>(SplashBloc());
-
 }

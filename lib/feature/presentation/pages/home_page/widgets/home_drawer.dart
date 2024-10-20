@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_home/core/theme/theme.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/data/models/drawer_model.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/drawer/widgets/drawer_item.dart';
+import 'package:rent_home/feature/data/models/drawer_model.dart';
+import 'package:rent_home/feature/presentation/pages/home_page/widgets/home_drawer_item.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});
@@ -22,7 +22,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
         children: List.generate(
           drawerItems.length,
           (index) {
-            return DrawerItem(
+            return HomeDrawerItem(
               item: drawerItems[index],
             );
           },

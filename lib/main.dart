@@ -7,7 +7,9 @@ import 'injection_container.dart' as di;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   di.init();
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -23,11 +25,10 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-          initialRoute: Routes.signUpPage,
+          initialRoute: Routes.homePage,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );
       },
     );
   }
 }
-

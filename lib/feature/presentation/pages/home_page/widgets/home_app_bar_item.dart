@@ -5,8 +5,8 @@ import 'package:rent_home/core/theme/app_svg.dart';
 import 'package:rent_home/core/theme/app_text_style.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-class AppBarItem extends StatelessWidget {
-  const AppBarItem({
+class HomeAppBarItem extends StatelessWidget {
+  const HomeAppBarItem({
     super.key,
   });
 

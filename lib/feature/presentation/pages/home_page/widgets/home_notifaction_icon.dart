@@ -5,9 +5,9 @@ import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-class NotifacationIcon extends StatelessWidget {
+class HomeNotifacationIcon extends StatelessWidget {
   final VoidCallback onTap;
-  const NotifacationIcon({
+  const HomeNotifacationIcon({
     super.key,
     required this.onTap,
   });
