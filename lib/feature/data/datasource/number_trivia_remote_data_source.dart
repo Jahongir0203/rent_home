@@ -19,6 +19,7 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   @override
   Future<NumberTriviaModel> getConcreteNumberTrivia(int number) =>
       _getNumberFromRemote("http://numbersapi.com/$number");
+
   @override
   Future<NumberTriviaModel> getRandomNumberTrivia() =>
       _getNumberFromRemote("http://numbersapi.com/random");
@@ -27,7 +28,6 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
     var response = await client.get(
       Uri.parse(url),
       headers: {"Content-type": "application/json"},
-
     );
 
     if (response.statusCode == 200) {

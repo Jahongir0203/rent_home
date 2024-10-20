@@ -14,5 +14,6 @@ class AppLocaleKeys {
       "Xavotir olmang, biz sizga ko'rsatmalarni yuboramiz";
   static const resetPassword = "Parolni tiklash";
   static const backToLogIn = "Kirish sahifasiga qaytish";
-  static const enterEmail="Emailingizni kiriting";
+  static const enterEmail = "Emailingizni kiriting";
+  static const noInternet = "Internet bilan aloqa mavjud emas";
 }
