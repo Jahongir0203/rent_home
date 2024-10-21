@@ -24,3 +24,22 @@ final class LogInVisibilityState extends LogInState {
 
   LogInVisibilityState({required this.isVisible});
 }
+
+// final class LogInEmailErrorState extends LogInState {
+//   final String emailError;
+//
+//   LogInEmailErrorState({required this.emailError});
+// }
+//
+// final class LogInPasswordErrorState extends LogInState {
+//   final String passwordError;
+//
+//   LogInPasswordErrorState({required this.passwordError});
+// }
+
+final class LogInInputErrorState extends LogInState {
+  final String? email;
+  final String? password;
+
+  LogInInputErrorState({required this.email, required this.password});
+}

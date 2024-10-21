@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:rent_home/core/error/exceptions.dart';
+import 'package:rent_home/core/error/failure.dart';
 import 'package:rent_home/feature/data/models/auth/request_log_In_model.dart';
 import 'package:rent_home/feature/data/models/auth/request_refresh_token_model.dart';
 import 'package:rent_home/feature/data/models/auth/request_register_model.dart';
@@ -150,7 +151,7 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return ResponseForgotPasswordModel.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw ServerFailure();
     }
   }
 

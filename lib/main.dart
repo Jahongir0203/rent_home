@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rent_home/feature/presentation/pages/splash_page/splash_page.dart';
 
+import 'core/router/app_routes.dart';
 import 'core/theme/app_theme.dart';
 import 'injection_container.dart' as di;
 
@@ -28,7 +30,8 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: SplashPage(),
+        onGenerateRoute: AppRoutes.onGenerateRoute,
+        initialRoute: Routes.splash,
       ),
     );
   }

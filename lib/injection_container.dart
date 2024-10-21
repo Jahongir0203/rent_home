@@ -13,6 +13,7 @@ import 'package:rent_home/feature/domain/usecase/auth_usecase/reset_password_use
 import 'package:rent_home/feature/domain/usecase/auth_usecase/validate_token_use_case.dart';
 import 'package:rent_home/feature/presentation/bloc/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/log_In_bloc/log_in_bloc.dart';
+import 'package:rent_home/feature/presentation/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
 
 import 'feature/presentation/bloc/splash_bloc/splash_bloc.dart';
@@ -21,10 +22,14 @@ final sl = GetIt.instance;
 
 void init() {
   ///Bloc
-  sl.registerFactory<SplashBloc>(() => SplashBloc(),);
-  sl.registerFactory<LogInBloc>(() => LogInBloc(useCase: sl.call()),);
-  sl.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUserUseCase: sl.call()),);
-  sl.registerFactory<ForgotPasswordBloc>(() => ForgotPasswordBloc(),);
+  sl.registerFactory<SplashBloc>(() => SplashBloc());
+  sl.registerFactory<LogInBloc>(() => LogInBloc(useCase: sl.call()));
+  sl.registerFactory<SignUpBloc>(
+      () => SignUpBloc(signUpUserUseCase: sl.call()));
+  sl.registerFactory<ForgotPasswordBloc>(
+      () => ForgotPasswordBloc(useCase: sl.call()));
+
+  sl.registerFactory(() => ResetPasswordBloc(useCase: sl.call()));
 
   ///UseCase
   sl.registerLazySingleton(() => ForgotPasswordUseCase(sl()));
@@ -49,4 +54,3 @@ void init() {
   ///External
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }
-

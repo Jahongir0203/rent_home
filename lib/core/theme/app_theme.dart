@@ -8,6 +8,12 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData.light().copyWith(
     brightness: Brightness.light,
     textTheme: TextTheme(
+      displaySmall: TextStyle(
+        fontWeight: FontWeight.w500,
+        color: AppColors.white,
+        fontSize: 20.sp,
+        fontFamily: "Raleway",
+      ),
       headlineLarge: TextStyle(
         fontWeight: FontWeight.w900,
         color: AppColors.mainColor,

@@ -23,5 +23,20 @@ final class SignUpVisibilityState extends SignUpState {
   final bool isVisible1;
   final bool isVisible2;
 
-  SignUpVisibilityState({required this.isVisible2,required this.isVisible1});
+  SignUpVisibilityState({required this.isVisible2, required this.isVisible1});
+}
+
+final class SignUpInputErrorState extends SignUpState {
+  final String? fullName;
+  final String? phoneNumber;
+  final String? email;
+  final String? password;
+  final String? confirmPassword;
+
+  SignUpInputErrorState(
+      {this.fullName,
+      this.phoneNumber,
+      this.email,
+      this.password,
+      this.confirmPassword});
 }

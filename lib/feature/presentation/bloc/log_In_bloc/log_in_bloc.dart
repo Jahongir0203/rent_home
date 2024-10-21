@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
+import 'package:rent_home/core/error/failure.dart';
 import 'package:rent_home/core/usecases/usecases.dart';
+import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/models/auth/request_log_In_model.dart';
 import 'package:rent_home/feature/data/models/auth/response_log_in_model.dart';
 import 'package:rent_home/feature/domain/usecase/auth_usecase/log_in_use_case.dart';
@@ -20,17 +23,50 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     logInUseCase = useCase;
     on<LogInLoadedEvent>((event, emit) async {
       emit(LogInLoadingState());
-
-      final response =
-          await logInUseCase(LogInParams(logInModel: event.requestLogInModel));
-
-      try {
-        response.fold(
-          (l) => emit(LogInFailureState(failure: mapFailureToString(l))),
-          (r) => emit(LogInSuccessState(responseLogInModel: r)),
-        );
-      } catch (e) {
-        emit(LogInFailureState(failure: e.toString()));
+      if (emailController.text.isEmpty && passwordController.text.isEmpty) {
+        emit(LogInInputErrorState(
+            email: AppLocaleKeys.fillField, password: AppLocaleKeys.fillField));
+      } else if (emailController.text.isEmpty) {
+        emit(LogInInputErrorState(
+            email: AppLocaleKeys.fillField, password: null));
+      } else if (passwordController.text.isEmpty) {
+        emit(LogInInputErrorState(
+            email: null, password: AppLocaleKeys.fillField));
+      } else if (!emailController.text.contains(AppLocaleKeys.gmail) &&
+          passwordController.text.length < 6) {
+        emit(LogInInputErrorState(
+            email: AppLocaleKeys.emailError,
+            password: AppLocaleKeys.passwordError));
+      } else if (!emailController.text.contains(AppLocaleKeys.gmail)) {
+        emit(LogInInputErrorState(
+            email: AppLocaleKeys.emailError, password: null));
+      } else if (passwordController.text.length < 6) {
+        emit(LogInInputErrorState(
+            email: null, password: AppLocaleKeys.passwordError));
+      } else {
+        try {
+          final response = await logInUseCase(
+              LogInParams(logInModel: event.requestLogInModel));
+          response.fold(
+            (l) => emit(LogInFailureState(failure: mapFailureToString(l))),
+            (r) => emit(LogInSuccessState(responseLogInModel: r)),
+          );
+        } on DioException catch (e) {
+          switch (e.response?.data[AppLocaleKeys.error]) {
+            case (AppLocaleKeys.invalidCredentials):
+              return emit(
+                  LogInFailureState(failure: AppLocaleKeys.errorPassword));
+            case (AppLocaleKeys.errorUser):
+              return emit(
+                  LogInFailureState(failure: AppLocaleKeys.userNotFound));
+            default:
+              return emit(
+                  LogInFailureState(failure: AppLocaleKeys.serverError));
+          }
+        } catch (e) {
+          emit(LogInFailureState(
+              failure: mapFailureToString(e.toString() as Failure)));
+        }
       }
     });
     on<LogInVisibilityEvent>((event, emit) {

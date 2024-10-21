@@ -9,9 +9,9 @@ class LogInLoadedEvent extends LogInEvent {
   LogInLoadedEvent({required this.requestLogInModel});
 }
 
-class LogInVisibilityEvent extends LogInEvent{
+class LogInVisibilityEvent extends LogInEvent {
   final bool isVisible;
 
   LogInVisibilityEvent({required this.isVisible});
-
 }
+

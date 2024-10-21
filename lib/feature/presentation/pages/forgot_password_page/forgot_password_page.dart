@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
+import 'package:rent_home/core/router/app_routes.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_lotties.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/presentation/bloc/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:rent_home/feature/presentation/pages/log_in_page/log_in_page.dart';
+import 'package:rent_home/feature/presentation/widgets/app_circular_progress_indicator.dart';
 import 'package:rent_home/feature/presentation/widgets/app_custom_button.dart';
 import 'package:rent_home/feature/presentation/widgets/app_text_form_field.dart';
+import 'package:rent_home/feature/presentation/widgets/app_toast.dart';
 
 import '../../../../injection_container.dart';
+import '../../widgets/back_to_log_in.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({super.key});
 
   final bloc = sl<ForgotPasswordBloc>();
+  final FToast fToast = FToast();
 
   @override
   Widget build(BuildContext context) {
+    fToast.init(context);
     return BlocProvider(
       create: (context) => bloc,
-      child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+      child: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
         bloc: bloc,
         builder: (context, state) {
           return Scaffold(
@@ -43,43 +50,50 @@ class ForgotPasswordPage extends StatelessWidget {
               AppTextFormField(
                   hintText: AppLocaleKeys.enterEmail,
                   isVisible: false,
+                  error: state is ForgotPasswordErrorState ? state.email : null,
                   controller: bloc.emailController,
                   keyBoardType: TextInputType.emailAddress,
                   prefixIcon: Icons.email,
                   onTab: (e) {
-                    print(e);
                   }).paddingOnly(top: 40.h, bottom: 30.h),
-              AppCustomButton(
-                      onTap: () {},
-                      color: AppColors.mainColor,
-                      text: AppLocaleKeys.resetPassword)
-                  .paddingOnly(bottom: 40.h),
-              InkWell(
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LogInPage(),
-                      ));
-                },
-                splashColor: AppColors.mainColor.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(8.r),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.keyboard_backspace,
-                      color: AppColors.black54,
-                    ).paddingOnly(right: 5.w),
-                    Text(
-                      AppLocaleKeys.backToLogIn,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    )
-                  ],
-                ),
-              )
+              state is ForgotPasswordLoadingState
+                  ? const AppCircularProgressIndicator()
+                  : AppCustomButton(
+                          onTap: () {
+                            bloc.add(ForgotPasswordLoadedEvent());
+                          },
+                          color: AppColors.mainColor,
+                          text: AppLocaleKeys.resetPassword)
+                      .paddingOnly(bottom: 40.h),
+              const BackToLogIn()
             ],
           ).paddingSymmetric(horizontal: 20.w, vertical: 80.h));
+        },
+        listener: (BuildContext context, ForgotPasswordState state) {
+          if (state is ForgotPasswordSuccessState) {
+            fToast.showToast(
+              toastDuration: const Duration(seconds: 3),
+              gravity: ToastGravity.TOP,
+              child: const AppToast(
+                icon: Icons.check,
+                message: AppLocaleKeys.forgotPasswordSuccess,
+                bgColor: AppColors.green,
+              ),
+            );
+            Navigator.pushReplacementNamed(context, Routes.resetPassword);
+          }
+
+          if (state is ForgotPasswordFailureState) {
+            fToast.showToast(
+              toastDuration: const Duration(seconds: 3),
+              gravity: ToastGravity.TOP,
+              child: const AppToast(
+                icon: Icons.cancel,
+                message: AppLocaleKeys.userNotFound,
+                bgColor: AppColors.red,
+              ),
+            );
+          }
         },
       ),
     );

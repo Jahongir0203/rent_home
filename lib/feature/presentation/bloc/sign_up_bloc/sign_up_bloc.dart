@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:meta/meta.dart';
 import 'package:rent_home/core/usecases/usecases.dart';
+import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/models/auth/request_register_model.dart';
 import 'package:rent_home/feature/data/models/auth/response_register_model.dart';
 
@@ -24,7 +27,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
+  var maskFormatter = MaskTextInputFormatter(
+    mask: '+998 ## ### ## ##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
   late final RegisterUserUseCase userUseCase;
 
   SignUpBloc({required RegisterUserUseCase signUpUserUseCase})
@@ -32,20 +40,108 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     userUseCase = signUpUserUseCase;
     on<SignUpLoadedEvent>((event, emit) async {
       emit(SignUpLoadingState());
-      final result = await userUseCase(
-          RegisterParams(registerModel: event.requestRegisterModel));
-
-      try {
-        result.fold(
-          (l) {
-            emit(SignUpFailureState(failure: mapFailureToString(l)));
-          },
-          (r) {
-            emit(SignUpSuccessState(responseRegisterModel: r));
-          },
-        );
-      } catch (e) {
-        emit(SignUpFailureState(failure: e.toString()));
+      if (fullNameController.text.isEmpty &&
+          emailController.text.isEmpty &&
+          passwordController.text.isEmpty &&
+          phoneNumberController.text.isEmpty &&
+          confirmPasswordController.text.isEmpty) {
+        emit(SignUpInputErrorState(
+            fullName: AppLocaleKeys.fillField,
+            phoneNumber: AppLocaleKeys.fillField,
+            email: AppLocaleKeys.fillField,
+            password: AppLocaleKeys.fillField,
+            confirmPassword: AppLocaleKeys.fillField));
+      } else if (fullNameController.text.isEmpty) {
+        emit(SignUpInputErrorState(fullName: AppLocaleKeys.fillField));
+      } else if (emailController.text.isEmpty &&
+          passwordController.text.isEmpty &&
+          phoneNumberController.text.isEmpty &&
+          confirmPasswordController.text.isEmpty) {
+        emit(SignUpInputErrorState(
+            phoneNumber: AppLocaleKeys.fillField,
+            email: AppLocaleKeys.fillField,
+            password: AppLocaleKeys.fillField,
+            confirmPassword: AppLocaleKeys.fillField));
+      } else if (phoneNumberController.text.isEmpty) {
+        emit(SignUpInputErrorState(phoneNumber: AppLocaleKeys.fillField));
+      } else if (phoneNumberController.text.length < 17) {
+        emit(SignUpInputErrorState(
+            phoneNumber: AppLocaleKeys.enterFullPhoneNumber));
+      } else if (![
+        '20',
+        '33',
+        '55',
+        '71',
+        '77',
+        '88',
+        '90',
+        '91',
+        '93',
+        '94',
+        '95',
+        '97',
+        '98',
+        '99'
+      ].contains(phoneNumberController.text.substring(5, 7))) {
+        emit(SignUpInputErrorState(phoneNumber: AppLocaleKeys.errorOperator));
+      } else if (!emailController.text.contains(AppLocaleKeys.gmail)) {
+        emit(SignUpInputErrorState(email: AppLocaleKeys.emailError));
+      } else if (emailController.text.isEmpty &&
+          passwordController.text.isEmpty &&
+          confirmPasswordController.text.isEmpty) {
+        emit(SignUpInputErrorState(
+            email: AppLocaleKeys.fillField,
+            password: AppLocaleKeys.fillField,
+            confirmPassword: AppLocaleKeys.fillField));
+      } else if (emailController.text.isEmpty) {
+        emit(SignUpInputErrorState(email: AppLocaleKeys.fillField));
+      } else if (!emailController.text.contains(AppLocaleKeys.gmail)) {
+        emit(SignUpInputErrorState(email: AppLocaleKeys.emailError));
+      } else if (passwordController.text.isEmpty &&
+          confirmPasswordController.text.isEmpty) {
+        emit(SignUpInputErrorState(
+            password: AppLocaleKeys.fillField,
+            confirmPassword: AppLocaleKeys.fillField));
+      } else if (passwordController.text.isEmpty) {
+        emit(SignUpInputErrorState(password: AppLocaleKeys.fillField));
+      } else if (confirmPasswordController.text.isEmpty) {
+        emit(SignUpInputErrorState(confirmPassword: AppLocaleKeys.fillField));
+      } else if (passwordController.text.length < 6 &&
+          confirmPasswordController.text.length < 6) {
+        emit(SignUpInputErrorState(
+            password: AppLocaleKeys.passwordError,
+            confirmPassword: AppLocaleKeys.passwordError));
+      } else if (passwordController.text != confirmPasswordController.text) {
+        emit(SignUpInputErrorState(
+            password: AppLocaleKeys.passwordNotSame,
+            confirmPassword: AppLocaleKeys.passwordNotSame));
+      } else {
+        try {
+          final result = await userUseCase(
+              RegisterParams(registerModel: event.requestRegisterModel));
+          result.fold(
+            (l) {
+              emit(SignUpFailureState(failure: mapFailureToString(l)));
+            },
+            (r) {
+              emit(SignUpSuccessState(responseRegisterModel: r));
+            },
+          );
+        } on DioException catch (e) {
+          switch (e.response!.data[AppLocaleKeys.error]) {
+            case AppLocaleKeys.dublicateEmail:
+              return emit(
+                  SignUpFailureState(failure: AppLocaleKeys.alreadyUsedEmail));
+            case AppLocaleKeys.dublicatePhoneNumber:
+              return emit(SignUpFailureState(
+                  failure: AppLocaleKeys.alreadyUsedPhoneNumber));
+            default:
+              return emit(
+                  SignUpFailureState(failure: AppLocaleKeys.serverError));
+          }
+        } catch (e) {
+          emit(SignUpFailureState(failure: e.toString()));
+        }
       }
     });
     on<SignUpPasswordEvent>((event, emit) {
