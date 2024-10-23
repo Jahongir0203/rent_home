@@ -7,7 +7,17 @@ import 'app_colors.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData.light().copyWith(
     brightness: Brightness.light,
+    scaffoldBackgroundColor: AppColors.white,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.white,
+    ),
     textTheme: TextTheme(
+      titleSmall: TextStyle(
+        fontWeight: FontWeight.w500,
+        color: AppColors.white,
+        fontSize: 16.sp,
+        fontFamily: "Raleway",
+      ),
       displaySmall: TextStyle(
         fontWeight: FontWeight.w500,
         color: AppColors.white,
@@ -54,7 +64,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       focusColor: AppColors.mainColor,
-      fillColor: AppColors.white,
+      fillColor: AppColors.fillColor,
       errorStyle: TextStyle(
         fontWeight: FontWeight.w400,
         color: AppColors.red,
@@ -63,31 +73,31 @@ class AppTheme {
       ),
       hintStyle: TextStyle(
         fontWeight: FontWeight.w400,
-        color: AppColors.black54,
+        color: AppColors.grey85,
         fontSize: 16.sp,
         fontFamily: "Raleway",
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
       border: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.black54),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(
           Radius.circular(8.r),
         ),
       ),
       errorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.red),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(
           Radius.circular(8.r),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.mainColor),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(
           Radius.circular(8.r),
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.black54),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(
           Radius.circular(8.r),
         ),

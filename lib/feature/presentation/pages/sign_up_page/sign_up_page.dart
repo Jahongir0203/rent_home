@@ -66,7 +66,6 @@ class SignUpPage extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

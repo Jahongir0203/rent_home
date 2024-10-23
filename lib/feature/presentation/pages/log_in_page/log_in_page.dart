@@ -6,9 +6,7 @@ import 'package:rent_home/core/extentions/padding_extension.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/feature/data/models/auth/request_log_In_model.dart';
 import 'package:rent_home/feature/presentation/bloc/log_In_bloc/log_in_bloc.dart';
-import 'package:rent_home/feature/presentation/pages/home_page/home_page.dart';
 import 'package:rent_home/feature/presentation/pages/log_in_page/widget/log_in_not_account_widget.dart';
-import 'package:rent_home/feature/presentation/pages/sign_up_page/sign_up_page.dart';
 import 'package:rent_home/feature/presentation/widgets/app_circular_progress_indicator.dart';
 import 'package:rent_home/feature/presentation/widgets/app_custom_button.dart';
 import 'package:rent_home/feature/presentation/widgets/app_text_form_field.dart';
@@ -57,7 +55,7 @@ class LogInPage extends StatelessWidget {
                   toastDuration: const Duration(seconds: 3),
                   isDismissable: true,
                   gravity: ToastGravity.TOP);
-              Navigator.pushReplacementNamed(context, Routes.home);
+              Navigator.pushReplacementNamed(context, Routes.drawer);
             }
           },
         ),

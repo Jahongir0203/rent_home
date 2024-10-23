@@ -6,6 +6,7 @@ import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_lotties.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/presentation/bloc/splash_bloc/splash_bloc.dart';
+import 'package:rent_home/feature/presentation/pages/drawer_page/drawer_page.dart';
 import 'package:rent_home/feature/presentation/pages/log_in_page/log_in_page.dart';
 import 'package:rent_home/injection_container.dart';
 
@@ -27,7 +28,7 @@ class SplashPage extends StatelessWidget {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LogInPage(),
+                  builder: (context) => DrawerPage(),
                 ));
           }
         },

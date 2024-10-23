@@ -24,7 +24,7 @@ class AppLocaleKeys {
   static const invalidCredentials =
       "invalid credentials: crypto/bcrypt: hashedPassword is not the hash of the given password";
   static const errorUser = "error getting user details: user not found";
-  static const errorPassword = "Password xato";
+  static const errorPassword = "Email yoki Parol xato";
   static const userNotFound = "Foydalanuvchi topilmadi";
   static const emailError = "Email formati xato";
   static const fillField = "Bu yerni to'ldiring";
@@ -42,9 +42,23 @@ class AppLocaleKeys {
       "Ushbu telefon raqamdan ro'yhatdan o'tilgan";
   static const alreadyUsedEmail = "Ushbu emaildan ro'yhatdan o'tilgan";
   static const invalidUser = "invalid credentials: user not found";
-  static const forgotPasswordSuccess = 'Parolni qayta sozlash uchun kod emaillingizga yuborildi';
+  static const forgotPasswordSuccess = 'Kod emailga yuborildi';
   static const enterCode = 'Kodni kiriting';
   static const enterNewPassword = 'Yanagi parolni kiriting';
   static const resetPasswordSuccess = 'Parol muvaffqiyatli yangilandi';
   static const unSendToEmail = "Ushbu emailga kod yuborilmagan";
+  static const wantToLogOut = 'Profildan chiqmoqchimisiz?';
+  static const cancel = 'Bekor qilish';
+  static const continue1 = "Chiqishni xohlaysizmi?";
+  static const yes = 'Ha';
+  static const no = "Yo'q";
+  static const willBeLostAllData =
+      "Tizimdan chiqmoqchimisiz? Barcha saqlanmagan maʼlumotlaringiz yoʻqoladi.";
+  static const location='Location';
+  static const jakarta='Jakarta';
+  static const searchHintTitle="Manzilni qidirish";
+  static const nearYou="Sizga yaqin";
+  static const seeMore='See more';
+  static const bestForYou="Siz uchun eng yaxshisi";
+
 }
