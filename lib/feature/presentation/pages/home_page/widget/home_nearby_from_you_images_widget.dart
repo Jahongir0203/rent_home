@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
 
+import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_png.dart';
 
@@ -22,7 +22,9 @@ class NearFromYouImagesWidget extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.detail);
+            },
             borderRadius: BorderRadius.circular(20.r),
             child: Ink(
               height: 272.h,
@@ -63,7 +65,7 @@ class NearFromYouImagesWidget extends StatelessWidget {
                                   .textTheme
                                   .headlineSmall!
                                   .copyWith(
-                                  color: AppColors.white, fontSize: 12.sp),
+                                      color: AppColors.white, fontSize: 12.sp),
                             )
                           ],
                         ).paddingSymmetric(horizontal: 3.w),
@@ -81,7 +83,7 @@ class NearFromYouImagesWidget extends StatelessWidget {
                                 .textTheme
                                 .headlineSmall!
                                 .copyWith(
-                                fontSize: 12.sp, color: AppColors.colorD7),
+                                    fontSize: 12.sp, color: AppColors.colorD7),
                           ),
                         ],
                       ).paddingOnly(left: 20.w, bottom: 16.h)

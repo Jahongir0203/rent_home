@@ -54,11 +54,14 @@ class AppLocaleKeys {
   static const no = "Yo'q";
   static const willBeLostAllData =
       "Tizimdan chiqmoqchimisiz? Barcha saqlanmagan maʼlumotlaringiz yoʻqoladi.";
-  static const location='Location';
-  static const jakarta='Jakarta';
-  static const searchHintTitle="Manzilni qidirish";
-  static const nearYou="Sizga yaqin";
-  static const seeMore='See more';
-  static const bestForYou="Siz uchun eng yaxshisi";
-
+  static const location = 'Location';
+  static const jakarta = 'Jakarta';
+  static const searchHintTitle = "Manzilni qidirish";
+  static const nearYou = "Sizga yaqin";
+  static const seeMore = 'See more';
+  static const bestForYou = "Siz uchun eng yaxshisi";
+  static const description = 'Tavsif';
+  static const gallery='Gallery';
+  static const price='Narxi';
+  static const rentNow="Buyurtma berish";
 }

@@ -16,4 +16,5 @@ class Routes {
   static const settings = '/settings';
   static const help = '/help';
   static const logOut = '/logOut';
+  static const detail = '/detail';
 }
