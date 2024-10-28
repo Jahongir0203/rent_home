@@ -26,7 +26,7 @@ class DrawerPage extends StatelessWidget {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return const AlertDialogWidget();
+                return AlertDialogWidget();
               },
             );
           }

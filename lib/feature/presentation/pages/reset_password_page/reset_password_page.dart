@@ -33,10 +33,8 @@ class ResetPasswordPage extends StatelessWidget {
             fToast.showToast(
                 toastDuration: const Duration(seconds: 4),
                 gravity: ToastGravity.TOP,
-                child: const AppToast(
-                  icon: Icons.check,
+                child: const AppSuccessToast(
                   message: AppLocaleKeys.resetPasswordSuccess,
-                  bgColor: AppColors.green,
                 ));
             Navigator.pushReplacementNamed(context, Routes.login);
           }
@@ -45,10 +43,8 @@ class ResetPasswordPage extends StatelessWidget {
             fToast.showToast(
                 toastDuration: const Duration(seconds: 4),
                 gravity: ToastGravity.TOP,
-                child: AppToast(
-                  icon: Icons.cancel,
+                child: AppErrorToast(
                   message: state.failure,
-                  bgColor: AppColors.red,
                 ));
           }
         },

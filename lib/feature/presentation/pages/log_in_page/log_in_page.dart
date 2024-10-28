@@ -36,10 +36,8 @@ class LogInPage extends StatelessWidget {
           listener: (BuildContext context, LogInState state) {
             if (state is LogInFailureState) {
               fToast.showToast(
-                  child: AppToast(
-                    icon: Icons.error,
+                  child: AppErrorToast(
                     message: state.failure,
-                    bgColor: AppColors.red,
                   ),
                   toastDuration: const Duration(seconds: 3),
                   isDismissable: true,
@@ -47,10 +45,8 @@ class LogInPage extends StatelessWidget {
             }
             if (state is LogInSuccessState) {
               fToast.showToast(
-                  child: const AppToast(
-                    icon: Icons.check,
+                  child: const AppSuccessToast(
                     message: AppLocaleKeys.logInSuccess,
-                    bgColor: AppColors.green,
                   ),
                   toastDuration: const Duration(seconds: 3),
                   isDismissable: true,

@@ -47,13 +47,13 @@ class AppLocaleKeys {
   static const enterNewPassword = 'Yanagi parolni kiriting';
   static const resetPasswordSuccess = 'Parol muvaffqiyatli yangilandi';
   static const unSendToEmail = "Ushbu emailga kod yuborilmagan";
-  static const wantToLogOut = 'Profildan chiqmoqchimisiz?';
+  static const wantToLogOut = 'Tizimdan chiqmoqchimisiz?';
   static const cancel = 'Bekor qilish';
   static const continue1 = "Chiqishni xohlaysizmi?";
   static const yes = 'Ha';
   static const no = "Yo'q";
   static const willBeLostAllData =
-      "Tizimdan chiqmoqchimisiz? Barcha saqlanmagan maʼlumotlaringiz yoʻqoladi.";
+      " Barcha saqlanmagan maʼlumotlaringiz yoʻqoladi.";
   static const location = 'Location';
   static const jakarta = 'Jakarta';
   static const searchHintTitle = "Manzilni qidirish";
@@ -61,7 +61,8 @@ class AppLocaleKeys {
   static const seeMore = 'See more';
   static const bestForYou = "Siz uchun eng yaxshisi";
   static const description = 'Tavsif';
-  static const gallery='Gallery';
-  static const price='Narxi';
-  static const rentNow="Buyurtma berish";
+  static const gallery = 'Gallery';
+  static const price = 'Narxi';
+  static const rentNow = "Buyurtma berish";
+  static const logOutSuccess = "Profildan muvaffaqiyatli chiqildi";
 }

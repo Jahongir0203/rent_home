@@ -12,8 +12,6 @@ import 'package:rent_home/feature/presentation/pages/detail_page/widget/detail_r
 import 'package:rent_home/feature/presentation/pages/detail_page/widget/detail_rent_now_widget.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_svg.dart';
-import '../../widgets/app_widgets.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage({super.key});

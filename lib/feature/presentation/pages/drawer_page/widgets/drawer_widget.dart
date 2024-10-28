@@ -34,6 +34,7 @@ class DrawerWidget extends StatelessWidget {
                   color: selectedIndex == index
                       ? AppColors.white
                       : AppColors.mainColor,
+                  border: Border.all(color: AppColors.mainColor),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20.r),
                     bottomRight: Radius.circular(20.r),

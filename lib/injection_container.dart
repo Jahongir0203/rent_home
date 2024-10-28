@@ -15,6 +15,7 @@ import 'package:rent_home/feature/presentation/bloc/drawer_page/drawer_bloc.dart
 import 'package:rent_home/feature/presentation/bloc/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/log_In_bloc/log_in_bloc.dart';
+import 'package:rent_home/feature/presentation/bloc/log_out_bloc/log_out_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
 
@@ -32,12 +33,9 @@ void init() {
       () => ForgotPasswordBloc(useCase: sl.call()));
 
   sl.registerFactory(() => ResetPasswordBloc(useCase: sl.call()));
-  sl.registerFactory(
-    () => DrawerBloc(),
-  );
-  sl.registerFactory(
-    () => HomeBloc(),
-  );
+  sl.registerFactory(() => DrawerBloc());
+  sl.registerFactory(() => HomeBloc());
+  sl.registerFactory(() => LogOutBloc(useCase: sl.call()));
 
   ///UseCase
   sl.registerLazySingleton(() => ForgotPasswordUseCase(sl()));

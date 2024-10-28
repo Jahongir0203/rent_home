@@ -10,6 +10,8 @@ import 'package:rent_home/feature/presentation/pages/drawer_page/drawer_page.dar
 import 'package:rent_home/feature/presentation/pages/log_in_page/log_in_page.dart';
 import 'package:rent_home/injection_container.dart';
 
+import '../../../../core/router/app_routes.dart';
+
 class SplashPage extends StatelessWidget {
   SplashPage({super.key});
 
@@ -25,11 +27,7 @@ class SplashPage extends StatelessWidget {
       child: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           if (state is SplashSuccessState) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DrawerPage(),
-                ));
+            Navigator.pushReplacementNamed(context, Routes.login);
           }
         },
         child: Scaffold(

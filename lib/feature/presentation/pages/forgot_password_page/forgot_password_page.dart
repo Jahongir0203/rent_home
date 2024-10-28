@@ -48,14 +48,16 @@ class ForgotPasswordPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               AppTextFormField(
-                  hintText: AppLocaleKeys.enterEmail,
-                  isVisible: false,
-                  error: state is ForgotPasswordErrorState ? state.email : null,
-                  controller: bloc.emailController,
-                  keyBoardType: TextInputType.emailAddress,
-                  prefixIcon: Icons.email,
-                  onTab: (e) {
-                  }).paddingOnly(top: 40.h, bottom: 30.h),
+                      hintText: AppLocaleKeys.enterEmail,
+                      isVisible: false,
+                      error: state is ForgotPasswordErrorState
+                          ? state.email
+                          : null,
+                      controller: bloc.emailController,
+                      keyBoardType: TextInputType.emailAddress,
+                      prefixIcon: Icons.email,
+                      onTab: (e) {})
+                  .paddingOnly(top: 40.h, bottom: 30.h),
               state is ForgotPasswordLoadingState
                   ? const AppCircularProgressIndicator()
                   : AppCustomButton(
@@ -74,10 +76,8 @@ class ForgotPasswordPage extends StatelessWidget {
             fToast.showToast(
               toastDuration: const Duration(seconds: 3),
               gravity: ToastGravity.TOP,
-              child: const AppToast(
-                icon: Icons.check,
+              child: const AppSuccessToast(
                 message: AppLocaleKeys.forgotPasswordSuccess,
-                bgColor: AppColors.green,
               ),
             );
             Navigator.pushReplacementNamed(context, Routes.resetPassword);
@@ -87,10 +87,8 @@ class ForgotPasswordPage extends StatelessWidget {
             fToast.showToast(
               toastDuration: const Duration(seconds: 3),
               gravity: ToastGravity.TOP,
-              child: const AppToast(
-                icon: Icons.cancel,
+              child: const AppErrorToast(
                 message: AppLocaleKeys.userNotFound,
-                bgColor: AppColors.red,
               ),
             );
           }

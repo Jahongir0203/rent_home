@@ -33,28 +33,22 @@ class SignUpPage extends StatelessWidget {
         listener: (context, state) {
           if (state is SignUpFailureState) {
             fToast.showToast(
-              child: AppToast(
-                icon: Icons.error,
-                message: state.failure,
-                bgColor: AppColors.red,
-              ),
-              toastDuration: const Duration(seconds: 3),
-              isDismissable: true,
-               gravity: ToastGravity.TOP
-            );
+                child: AppErrorToast(
+                  message: state.failure,
+                ),
+                toastDuration: const Duration(seconds: 3),
+                isDismissable: true,
+                gravity: ToastGravity.TOP);
           }
 
           if (state is SignUpSuccessState) {
             fToast.showToast(
-              child: const AppToast(
-                icon: Icons.check,
-                message: AppLocaleKeys.registerSuccess,
-                bgColor: AppColors.green,
-              ),
+                child: const AppSuccessToast(
+                  message: AppLocaleKeys.registerSuccess,
+                ),
                 toastDuration: const Duration(seconds: 3),
                 isDismissable: true,
-                gravity: ToastGravity.TOP
-            );
+                gravity: ToastGravity.TOP);
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -81,7 +75,9 @@ class SignUpPage extends StatelessWidget {
                       controller: bloc.fullNameController,
                       keyBoardType: TextInputType.name,
                       prefixIcon: Icons.person,
-                      error: state is SignUpInputErrorState? state.fullName:null,
+                      error: state is SignUpInputErrorState
+                          ? state.fullName
+                          : null,
                       onTab: (e) {
                         print(e);
                       }).paddingOnly(
@@ -94,7 +90,9 @@ class SignUpPage extends StatelessWidget {
                       controller: bloc.phoneNumberController,
                       keyBoardType: TextInputType.number,
                       prefixIcon: Icons.phone,
-                      error: state is SignUpInputErrorState? state.phoneNumber:null,
+                      error: state is SignUpInputErrorState
+                          ? state.phoneNumber
+                          : null,
                       onTab: (e) {
                         print(e);
                       }).paddingOnly(top: 30.h),
@@ -104,9 +102,9 @@ class SignUpPage extends StatelessWidget {
                       controller: bloc.emailController,
                       keyBoardType: TextInputType.emailAddress,
                       prefixIcon: Icons.email,
-                      error: state is SignUpInputErrorState? state.email:null,
+                      error:
+                          state is SignUpInputErrorState ? state.email : null,
                       onTab: (e) {
-                        print(e);
                       }).paddingOnly(top: 30.h),
                   AppTextFormField(
                           hintText: AppLocaleKeys.password,
@@ -117,7 +115,9 @@ class SignUpPage extends StatelessWidget {
                           controller: bloc.passwordController,
                           keyBoardType: TextInputType.visiblePassword,
                           prefixIcon: Icons.lock,
-                      error: state is SignUpInputErrorState? state.password:null,
+                          error: state is SignUpInputErrorState
+                              ? state.password
+                              : null,
                           suffixIcon: IconButton(
                               onPressed: () {
                                 bloc.add(state is SignUpVisibilityState
@@ -143,7 +143,9 @@ class SignUpPage extends StatelessWidget {
                       controller: bloc.confirmPasswordController,
                       keyBoardType: TextInputType.visiblePassword,
                       prefixIcon: Icons.lock,
-                      error: state is SignUpInputErrorState? state.confirmPassword:null,
+                      error: state is SignUpInputErrorState
+                          ? state.confirmPassword
+                          : null,
                       suffixIcon: IconButton(
                           onPressed: () {
                             bloc.add(state is SignUpVisibilityState
@@ -159,7 +161,6 @@ class SignUpPage extends StatelessWidget {
                                   : const Icon(Icons.visibility)
                               : const Icon(Icons.visibility_off)),
                       onTab: (e) {
-                        print(e);
                       }).paddingOnly(top: 30.h),
                   state is SignUpLoadingState
                       ? const AppCircularProgressIndicator()
