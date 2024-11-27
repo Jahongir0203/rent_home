@@ -27,7 +27,8 @@ class SplashPage extends StatelessWidget {
       child: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           if (state is SplashSuccessState) {
-            Navigator.pushReplacementNamed(context, Routes.login);
+            Navigator.pushReplacementNamed(context,
+                state.accessToken == null ? Routes.login : Routes.drawer);
           }
         },
         child: Scaffold(

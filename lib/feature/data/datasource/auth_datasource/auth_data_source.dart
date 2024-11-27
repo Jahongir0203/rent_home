@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:rent_home/core/error/exceptions.dart';
 import 'package:rent_home/core/error/failure.dart';
+import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/models/auth/request_log_In_model.dart';
 import 'package:rent_home/feature/data/models/auth/request_refresh_token_model.dart';
 import 'package:rent_home/feature/data/models/auth/request_register_model.dart';
@@ -95,7 +96,8 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return ResponseRegisterModel.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw const ServerException(
+          statusCode: 404, errorMessage: "Unexpected Error");
     }
   }
 
@@ -113,7 +115,8 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return ResponseLogInModel.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw const ServerException(
+          statusCode: 404, errorMessage: AppLocaleKeys.unexpectedError);
     }
   }
 
@@ -133,7 +136,8 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return response.data;
     } else {
-      throw ServerException();
+      throw const ServerException(
+          statusCode: 404, errorMessage: AppLocaleKeys.unexpectedError);
     }
   }
 
@@ -151,7 +155,7 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return ResponseForgotPasswordModel.fromJson(response.data);
     } else {
-      throw ServerFailure();
+      throw const ServerFailure();
     }
   }
 
@@ -170,7 +174,8 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return ResponseRefreshTokenModel.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw const ServerException(
+          statusCode: 404, errorMessage: AppLocaleKeys.unexpectedError);
     }
   }
 
@@ -189,7 +194,8 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return response.data;
     } else {
-      throw ServerException();
+      throw const ServerException(
+          statusCode: 404, errorMessage: AppLocaleKeys.unexpectedError);
     }
   }
 
@@ -208,7 +214,8 @@ class AuthDataSourceImpl extends AuthDataSource {
     if (response.statusCode == 200) {
       return response.data;
     } else {
-      throw ServerException();
+      throw const ServerException(
+          statusCode: 404, errorMessage: AppLocaleKeys.unexpectedError);
     }
   }
 }

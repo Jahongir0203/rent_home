@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_png.dart';
 import '../../../../../core/theme/app_svg.dart';
+import '../../../../data/models/house/get_houses_response.dart';
 import '../../../widgets/app_widgets.dart';
 
 class ImageWidget extends StatelessWidget {
-  const ImageWidget({
+  ImageWidget({
     super.key,
+    required this.house,
   });
+
+  final House house;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,8 @@ class ImageWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
             image: const DecorationImage(
-              image: AssetImage(AppPng.img3),
+              image: NetworkImage(
+                  "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg"),
               fit: BoxFit.fill,
             ),
           ),
@@ -68,13 +74,13 @@ class ImageWidget extends StatelessWidget {
               ],
             ),
             Text(
-              "Dreamsville House",
+              house.address ?? "Tashkent",
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                    fontWeight: FontWeight.w600,
+                  ),
             ).paddingOnly(top: 137.h),
             Text(
-              "Jl. Sultan Iskandar Muda, Jakarta selatan",
+              "${house.squareFootage ?? 40} м²",
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
@@ -90,11 +96,11 @@ class ImageWidget extends StatelessWidget {
                         color: AppColors.white.withOpacity(0.4),
                       ),
                       child: AppWidgets.imageSvg(
-                          path: AppSvg.icBedLight, height: 16.r)
+                              path: AppSvg.icBedLight, height: 16.r)
                           .paddingSymmetric(horizontal: 4.r, vertical: 5.r),
                     ).paddingOnly(right: 8.w),
                     Text(
-                      '6',
+                      '${house.bedrooms ?? 6}',
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
@@ -117,11 +123,11 @@ class ImageWidget extends StatelessWidget {
                         color: AppColors.white.withOpacity(0.4),
                       ),
                       child: AppWidgets.imageSvg(
-                          path: AppSvg.icBathLight, height: 16.r)
+                              path: AppSvg.icBathLight, height: 16.r)
                           .paddingSymmetric(horizontal: 4.r, vertical: 5.r),
                     ).paddingOnly(right: 8.w),
                     Text(
-                      '8',
+                      '${house.bathrooms ?? 2}',
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!

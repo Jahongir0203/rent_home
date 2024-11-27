@@ -6,12 +6,13 @@ import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_png.dart';
 import '../../../../../core/theme/app_svg.dart';
+import '../../../../data/models/house/get_houses_response.dart';
 import '../../../widgets/app_widgets.dart';
 
 class BestForYouImagesWidget extends StatelessWidget {
-  const BestForYouImagesWidget({
-    super.key,
-  });
+  List<House>? houses;
+
+  BestForYouImagesWidget({super.key, required this.houses});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class BestForYouImagesWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            Navigator.pushNamed(context, Routes.detail);
+            Navigator.pushNamed(context, Routes.detail,
+                arguments: houses![index]);
           },
           splashColor: AppColors.grey83.withOpacity(0.3),
           child: Row(
@@ -34,7 +36,8 @@ class BestForYouImagesWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),
                   image: const DecorationImage(
-                    image: AssetImage(AppPng.img3),
+                    image: NetworkImage(
+                        "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg"),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -44,14 +47,16 @@ class BestForYouImagesWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Orchard House",
+                    houses![index].propertyType ?? "Orchard House",
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!
                         .copyWith(color: AppColors.leadingColor),
                   ),
                   Text(
-                    "Rp.250.000.000/Year",
+                    " ${houses![index].price ?? 2500000} so'm/oy",
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
@@ -64,7 +69,7 @@ class BestForYouImagesWidget extends StatelessWidget {
                           AppWidgets.imageSvg(path: AppSvg.icBedDark)
                               .paddingOnly(right: 8.w),
                           Text(
-                            '6',
+                            '${houses![index].bedrooms ?? 6}',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -86,7 +91,7 @@ class BestForYouImagesWidget extends StatelessWidget {
                           AppWidgets.imageSvg(path: AppSvg.icBathDark)
                               .paddingOnly(right: 8.w),
                           Text(
-                            '8',
+                            '${houses![index].bathrooms ?? 8}',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!

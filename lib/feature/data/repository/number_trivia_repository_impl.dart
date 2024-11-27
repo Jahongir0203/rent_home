@@ -42,14 +42,14 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
         localDataSource.cacheNumberTrivia(remoteTrivia);
         return Right(remoteTrivia);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
       try {
         final localeTrivia = await localDataSource.getLastNumberTrivia();
         return Right(localeTrivia);
       } on CacheException {
-        return Left(CacheFailure());
+        return const Left(CacheFailure());
       }
     }
   }

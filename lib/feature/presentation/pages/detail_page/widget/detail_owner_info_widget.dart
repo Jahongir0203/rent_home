@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_svg.dart';
@@ -10,6 +11,37 @@ class OwnerInfoWidget extends StatelessWidget {
   const OwnerInfoWidget({
     super.key,
   });
+
+  /// make a call
+  Future<void> makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      throw 'Could not make the call to $phoneNumber';
+    }
+  }
+
+  /// make a telegram message
+  Future<void> openTelegramProfile(String username) async {
+    final Uri url = Uri.parse('https://t.me/$username'); // Fallback web URL
+    final Uri tgUrl =
+        Uri.parse('tg://resolve?domain=$username'); // Telegram app URL
+
+    if (await canLaunchUrl(tgUrl)) {
+      // Open in Telegram app
+      await launchUrl(tgUrl);
+    } else if (await canLaunchUrl(url)) {
+      // Fallback to browser
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch Telegram profile for $username';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +76,21 @@ class OwnerInfoWidget extends StatelessWidget {
           ],
         ).paddingOnly(left: 16.w),
         OwnerContactInfo(
-          onTap: () {},
+          onTap: () {
+            makePhoneCall("+998930836460");
+          },
           svg: AppSvg.icPhoneLight,
         ).paddingOnly(left: 122.w, right: 16.w),
         OwnerContactInfo(
-          onTap: () {},
+          onTap: () {
+            openTelegramProfile("Jahongir0203");
+          },
           svg: AppSvg.icMessage,
         ),
       ],
     );
   }
 }
-
 
 class OwnerContactInfo extends StatelessWidget {
   const OwnerContactInfo({

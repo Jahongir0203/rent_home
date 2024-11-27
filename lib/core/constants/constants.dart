@@ -12,7 +12,9 @@ import '../router/app_routes.dart';
 
 sealed class Constants {
   static const authUrl = "http://3.120.40.35:5555/auth";
+  static const baseUrl = "http://3.120.40.35:9996";
 
+  ///Auth
   static const register = "/register";
   static const logIn = "/login";
   static const logOut = "/logout";
@@ -20,6 +22,14 @@ sealed class Constants {
   static const refreshToken = "/refresh-token";
   static const resetPassword = "/reset-password";
   static const validateToken = "/validate-token";
+
+  /// House
+
+  static const deleteHouse = "/properties/propertiesdelete/";
+  static const getHouseById = "/properties/propertiesgetbyid/";
+  static const getHouse = "/properties/propertiesgetall/100/1";
+  static const updateHouse = "properties/propertiesupdate";
+  static const createHouse = "/properties/propertiescreate";
 }
 
 const listIconsData = [
@@ -57,9 +67,4 @@ var listPages = [
   const HelpPage(),
 ];
 
-var listCategory=[
-  "Uy",
-  "Kvartira",
-  "Mehmonxona",
-  "Villa"
-];
+var listCategory = ["Uy", "Kvartira", "Mehmonxona", "Villa"];

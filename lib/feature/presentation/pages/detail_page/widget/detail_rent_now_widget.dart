@@ -7,9 +7,9 @@ import '../../../../../core/utils/app_locale_keys.dart';
 
 class RentNowWidget extends StatelessWidget {
   const RentNowWidget({
-    super.key,
+    super.key, required this.cost,
   });
-
+final String? cost;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +31,7 @@ class RentNowWidget extends StatelessWidget {
                     .copyWith(fontSize: 12.sp, color: AppColors.grey85),
               ).paddingOnly(bottom: 8.h),
               Text(
-                'Rp. 2.500.000.000 / Year',
+                cost?? 'Rp. 2.500.000.000 / Year',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: AppColors.leadingColor,
                 ),

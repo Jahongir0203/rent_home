@@ -2,10 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../data/models/house/get_houses_response.dart';
+
 class MapsWidget extends StatelessWidget {
   const MapsWidget({
     super.key,
+    required this.house,
   });
+
+  final House house;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +42,12 @@ class MapsWidget extends StatelessWidget {
             target: LatLng(49.9, 61.1),
           ),
           markers: {
-            const Marker(
-                markerId: MarkerId('1'),
-                position: LatLng(49.9, 69.1),
+            Marker(
+                markerId: const MarkerId('1'),
+                position: LatLng(house.latitude?.toDouble() ?? 49.9,
+                    house.longitude?.toDouble() ?? 69.1),
                 icon: BitmapDescriptor.defaultMarker,
-                infoWindow: InfoWindow(title: 'Marker', snippet: '*'),
+                infoWindow: const InfoWindow(title: 'Marker', snippet: '*'),
                 visible: true),
           },
         ),

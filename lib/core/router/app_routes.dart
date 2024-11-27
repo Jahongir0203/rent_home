@@ -4,6 +4,7 @@ import 'package:rent_home/feature/presentation/pages/log_in_page/log_in_page.dar
 import 'package:rent_home/feature/presentation/pages/reset_password_page/reset_password_page.dart';
 import 'package:rent_home/feature/presentation/pages/sign_up_page/sign_up_page.dart';
 
+import '../../feature/data/models/house/get_houses_response.dart';
 import '../../feature/presentation/pages/drawer_page/drawer_page.dart';
 import '../../feature/presentation/pages/help_page/help_page.dart';
 import '../../feature/presentation/pages/home_page/home_page.dart';
@@ -86,7 +87,11 @@ class AppRoutes {
 
       case Routes.detail:
         return MaterialPageRoute(
-          builder: (context) => DetailPage(),
+          builder: (context) {
+            return DetailPage(
+              house: settings.arguments as House,
+            );
+          },
         );
     }
     return null;

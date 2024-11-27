@@ -30,10 +30,10 @@ class AuthRepositoryImpl extends AuthRepository {
         final user = await authDataSource.forgotPassword(email: email);
         return Right(user);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -46,10 +46,10 @@ class AuthRepositoryImpl extends AuthRepository {
             requestLogInModel: requestLogInModel);
         return Right(logInRes);
       } on ServerException {
-        return Left(ServiceFailure());
+        return Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -60,10 +60,10 @@ class AuthRepositoryImpl extends AuthRepository {
         final logOutRes = await authDataSource.logOutUSer(email: email);
         return Right(logOutRes);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -76,10 +76,10 @@ class AuthRepositoryImpl extends AuthRepository {
             requestRefreshTokenModel: requestRefreshTokenModel);
         return Right(refreshTokenRes);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -92,10 +92,10 @@ class AuthRepositoryImpl extends AuthRepository {
             requestRegisterModel: requestRegisterModel);
         return Right(registerUserRes);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -108,10 +108,10 @@ class AuthRepositoryImpl extends AuthRepository {
             resetPasswordModel: requestResetPassword);
         return Right(resetPasswordRes);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -124,10 +124,10 @@ class AuthRepositoryImpl extends AuthRepository {
             requestValidateTokenModel: requestValidateTokenModel);
         return Right(validateTokenRes);
       } on ServerException {
-        return Left(ServiceFailure());
+        return const Left(ServerFailure());
       }
     } else {
-      return Left(ServiceFailure(message: AppLocaleKeys.noInternet));
+      return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 }

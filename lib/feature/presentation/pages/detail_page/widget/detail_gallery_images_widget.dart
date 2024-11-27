@@ -4,9 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theme/app_png.dart';
 
 class GalleryImagesWidget extends StatelessWidget {
-  const GalleryImagesWidget({
+  GalleryImagesWidget({
     super.key,
   });
+
+  List images = [
+    "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg",
+    "https://media.gettyimages.com/id/147205632/photo/modern-home-with-swimming-pool.jpg?s=612x612&w=gi&k=20&c=KziR75bRl6md69oB-cEvNv_0ak-I-f6kmkUpKVQBH-E=",
+    "https://res.akamaized.net/domain/image/upload/t_web/v1538713881/bigsmall_Mirvac_house2_twgogv.jpg",
+    "https://cdn.houseplansservices.com/product/4eat34je4b4208ebguq0ruoekn/w800x533.jpg?v=2"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +29,17 @@ class GalleryImagesWidget extends StatelessWidget {
               width: 72.r,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
-                image: const DecorationImage(
+                image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(AppPng.img3),
+                  image: NetworkImage(images[index]),
                 ),
               ),
             );
           },
           separatorBuilder: (context, index) => SizedBox(
-            width: 16.r,
-          ),
-          itemCount: 6),
+                width: 16.r,
+              ),
+          itemCount: images.length),
     );
   }
 }

@@ -65,4 +65,6 @@ class AppLocaleKeys {
   static const price = 'Narxi';
   static const rentNow = "Buyurtma berish";
   static const logOutSuccess = "Profildan muvaffaqiyatli chiqildi";
+  static const user = 'User';
+  static const unexpectedError = "Unexpected Error";
 }

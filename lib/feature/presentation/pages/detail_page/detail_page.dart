@@ -12,18 +12,21 @@ import 'package:rent_home/feature/presentation/pages/detail_page/widget/detail_r
 import 'package:rent_home/feature/presentation/pages/detail_page/widget/detail_rent_now_widget.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../data/models/house/get_houses_response.dart';
 
 class DetailPage extends StatelessWidget {
-  DetailPage({super.key});
+  DetailPage({super.key, required this.house});
 
+  final House house;
   final ScrollController controller = ScrollController();
-  Marker marker = const Marker(
-    markerId: MarkerId('1'),
-    position: LatLng(49.9, 69.1),
-  );
 
   @override
   Widget build(BuildContext context) {
+    Marker marker = Marker(
+      markerId: MarkerId('1'),
+      position:
+          LatLng(house.latitude?.toDouble() ?? 69.0, house.longitude ?? 69.0),
+    );
     return Container(
       color: AppColors.white,
       child: Scaffold(
@@ -40,14 +43,20 @@ class DetailPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const ImageWidget(),
+                    ImageWidget(
+                      house: house,
+                    ),
                     const DescriptionTitleWidget()
                         .paddingSymmetric(vertical: 20.h),
-                    const ReadMoreWidget().paddingOnly(bottom: 24.h),
+                    ReadMoreWidget(
+                      house: house,
+                    ).paddingOnly(bottom: 24.h),
                     const OwnerInfoWidget().paddingOnly(bottom: 32.h),
                     const GalleryTitleWidget().paddingOnly(bottom: 20.h),
-                    const GalleryImagesWidget().paddingOnly(bottom: 32.h),
-                    const MapsWidget(),
+                    GalleryImagesWidget().paddingOnly(bottom: 32.h),
+                    MapsWidget(
+                      house: house,
+                    ),
                   ],
                 ).paddingOnly(
                   left: 20.w,
@@ -55,7 +64,7 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ),
-            const RentNowWidget(),
+            RentNowWidget(cost: "${house.price} so'm/oy",),
           ],
         ),
       ),

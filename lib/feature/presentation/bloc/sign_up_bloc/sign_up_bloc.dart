@@ -9,6 +9,8 @@ import 'package:rent_home/feature/data/models/auth/request_register_model.dart';
 import 'package:rent_home/feature/data/models/auth/response_register_model.dart';
 
 import '../../../../core/error/failure.dart';
+import '../../../../core/services/storage_service.dart';
+import '../../../../injection_container.dart';
 import '../../../domain/usecase/auth_usecase/register_user__use_case.dart';
 
 part 'sign_up_event.dart';
@@ -27,6 +29,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  final storageService = sl<StorageService>();
+
   var maskFormatter = MaskTextInputFormatter(
     mask: '+998 ## ### ## ##',
     filter: {
@@ -123,7 +128,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             (l) {
               emit(SignUpFailureState(failure: mapFailureToString(l)));
             },
-            (r) {
+            (r) async {
+              await storageService.putUserId(r.id);
               emit(SignUpSuccessState(responseRegisterModel: r));
             },
           );
@@ -158,6 +164,6 @@ String mapFailureToString(Failure failure) {
     case const (CacheFailure):
       return cacheFailure;
     default:
-      return ("Unexpected error");
+      return (AppLocaleKeys.serverError);
   }
 }

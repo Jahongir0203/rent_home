@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
 import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/feature/data/models/auth/request_log_In_model.dart';
@@ -13,6 +14,7 @@ import 'package:rent_home/feature/presentation/widgets/app_text_form_field.dart'
 
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/utils/app_locale_keys.dart';
+import '../../../../core/utils/location_permission.dart';
 import '../../../../injection_container.dart';
 import '../../widgets/app_toast.dart';
 import '../forgot_password_page/forgot_password_page.dart';
@@ -21,6 +23,7 @@ class LogInPage extends StatelessWidget {
   LogInPage({super.key});
 
   final bloc = sl<LogInBloc>();
+
   final FToast fToast = FToast();
 
   @override

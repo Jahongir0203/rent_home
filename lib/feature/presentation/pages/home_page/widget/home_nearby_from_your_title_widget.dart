@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../data/models/house/get_houses_response.dart';
 
 class NearFromYouWidget extends StatelessWidget {
-  const NearFromYouWidget({
-    super.key,
-  });
+
+  NearFromYouWidget({super.key,});
 
   @override
   Widget build(BuildContext context) {

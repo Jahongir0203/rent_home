@@ -1,15 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
+import 'package:rent_home/core/services/storage_service.dart';
+import 'package:rent_home/feature/data/models/position_model.dart';
 
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_png.dart';
+import '../../../../../injection_container.dart';
+import '../../../../data/models/house/get_houses_response.dart';
 
-class NearFromYouImagesWidget extends StatelessWidget {
-  const NearFromYouImagesWidget({
-    super.key,
-  });
+class NearFromYouImagesWidget extends StatefulWidget {
+  List<House>? houses;
+
+  NearFromYouImagesWidget({super.key, required this.houses});
+
+  @override
+  State<NearFromYouImagesWidget> createState() => _NearFromYouImagesWidgetState();
+}
+
+class _NearFromYouImagesWidgetState extends State<NearFromYouImagesWidget> {
+  StorageService storageService = sl<StorageService>();
+
+  Future<String> calculateDistance(double? lat, double? long) async {
+    PositionModel? positionModel = await storageService.getCurrentPosition();
+    double distanceInMeters = Geolocator.distanceBetween(
+      positionModel?.latitude ?? 69.2, // Latitude of point 1
+      positionModel?.longitude ?? 77.5946, // Longitude of point 1
+      lat ?? 69.21, // Latitude of point 2
+      long ?? 77.5946, // Longitude of point 2
+    );
+
+    print("Distance: ${(distanceInMeters / 1000).toStringAsFixed(2)} km");
+    return '${(distanceInMeters / 1000).toStringAsFixed(2)} km';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +44,24 @@ class NearFromYouImagesWidget extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: widget.houses?.length ?? 0,
         itemBuilder: (context, index) {
+          String? distance;
+          // calculateDistance(widget.houses![index].latitude?.toDouble(),
+          //         widget.houses![index].longitude!.toDouble())
+          //     .then(
+          //   (value) {
+          //     setState(() {
+          //       distance = value;
+          //     });
+          //   },
+          // );
+
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(context, Routes.detail);
+              Navigator.pushNamed(context, Routes.detail,
+              arguments: widget.houses![index]
+              );
             },
             borderRadius: BorderRadius.circular(20.r),
             child: Ink(
@@ -38,7 +76,9 @@ class NearFromYouImagesWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
                       image: const DecorationImage(
-                          image: AssetImage(AppPng.img3), fit: BoxFit.fill),
+                          image: NetworkImage(
+                              "https://i.pinimg.com/originals/26/58/06/265806abb62c82c7cfdaeb097d5245d2.jpg"),
+                          fit: BoxFit.fill),
                     ),
                   ),
                   Column(
@@ -60,7 +100,7 @@ class NearFromYouImagesWidget extends StatelessWidget {
                               size: 10.r,
                             ).paddingOnly(right: 2.w),
                             Text(
-                              "1.8 km",
+                              distance?? "1.8 km",
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall!
@@ -74,11 +114,12 @@ class NearFromYouImagesWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Dreamville House",
+                            widget.houses![index].address ?? "Address",
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           Text(
-                            "JL. Sulan Iskandar Muda",
+                            widget.houses![index].leaseTerms ??
+                                "JL. Sulan Iskandar Muda",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
