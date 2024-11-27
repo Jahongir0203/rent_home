@@ -56,9 +56,16 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
           response.fold(
             (l) => emit(LogInFailureState(failure: mapFailureToString(l))),
             (r) async {
-              storageService.putAccessToken(r.accessToken);
-              storageService.putRefreshToken(r.refreshToken);
-              return emit(LogInSuccessState(responseLogInModel: r));
+              print("AccessToken:${r.accessToken}");
+              print("RefreshToken:${r.refreshToken}");
+
+              try {
+                await storageService.putAccessToken(r.accessToken);
+                await storageService.putRefreshToken(r.refreshToken);
+              } catch (e) {
+                print(e);
+              }
+              add(LogInSuccessEvent(responseLogInModel: r));
             },
           );
         } on DioException catch (e) {
@@ -81,6 +88,10 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     });
     on<LogInVisibilityEvent>((event, emit) {
       emit(LogInVisibilityState(isVisible: event.isVisible));
+    });
+
+    on<LogInSuccessEvent>((event, emit) {
+      emit(LogInSuccessState(responseLogInModel: event.responseLogInModel));
     });
   }
 }

@@ -15,3 +15,8 @@ class LogInVisibilityEvent extends LogInEvent {
   LogInVisibilityEvent({required this.isVisible});
 }
 
+class LogInSuccessEvent extends LogInEvent {
+  final ResponseLogInModel responseLogInModel;
+
+  LogInSuccessEvent({required this.responseLogInModel});
+}

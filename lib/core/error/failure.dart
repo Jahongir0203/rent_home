@@ -5,12 +5,14 @@ abstract class Failure extends Equatable {
   final String? errorKey;
 
   const Failure({this.errorMessage, this.errorKey});
+
   @override
   List<Object> get props => [];
 }
 
 class ServerFailure extends Failure {
   final num? statusCode;
+
   const ServerFailure({super.errorMessage, this.statusCode, super.errorKey});
 }
 
@@ -30,6 +32,6 @@ class CacheFailure extends Failure {
   const CacheFailure({super.errorMessage});
 }
 
-class InternetFailure extends Failure{
-
+class InternetFailure extends Failure {
+  const InternetFailure({super.errorMessage});
 }

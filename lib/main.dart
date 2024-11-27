@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
+import 'package:rent_home/feature/data/models/house_model.dart';
 
 import 'core/router/app_routes.dart';
 import 'core/theme/app_theme.dart';
@@ -14,6 +15,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(PositionModelAdapter());
+  Hive.registerAdapter(HouseTypeModelAdapter());
+
   await Hive.openBox(AppLocaleKeys.user);
   await ScreenUtil.ensureScreenSize();
   di.init();

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import 'package:rent_home/core/error/failure.dart';
 import 'package:rent_home/core/network/network_info.dart';
+import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/datasource/home_datasource/home_data_source.dart';
 
 import 'package:rent_home/feature/data/models/house/delete_house_response.dart';
@@ -81,7 +82,8 @@ class HouseRepositoryImpl extends HouseRepository {
         return Left(ParsingFailure(errorMessage: e.errorMessage));
       }
     } else {
-      return Left(InternetFailure());
+      return const Left(
+          InternetFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 

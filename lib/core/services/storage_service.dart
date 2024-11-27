@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/models/position_model.dart';
 
+import '../../feature/data/models/house_model.dart';
+
 class StorageService {
   final Box _box = Hive.box(AppLocaleKeys.user);
 
@@ -25,6 +27,15 @@ class StorageService {
   Future<void> putCurrentPosition(Position position) async {
     await _box.put(
         _StorageKeys.currentPosition, PositionModel.fromPosition(position));
+  }
+
+  Future<void> putSavedHouse(List<HouseTypeModel> houses) async {
+    await _box.put(_StorageKeys.savedHouse, houses);
+  }
+
+  Future<List<HouseTypeModel>> getSavedHouses() async {
+    return await _box
+        .get(_StorageKeys.savedHouse, defaultValue: [HouseTypeModel()]);
   }
 
   Future<String?> getUserId() async {
@@ -58,4 +69,5 @@ class _StorageKeys {
   static const refreshToken = 'RefreshToken';
   static const currentLocation = "CurrentLocation";
   static const currentPosition = "CurrentPosition";
+  static const savedHouse = "Savedhouse";
 }

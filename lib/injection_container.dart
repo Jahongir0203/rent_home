@@ -16,6 +16,7 @@ import 'package:rent_home/feature/domain/usecase/auth_usecase/refresh_token_use_
 import 'package:rent_home/feature/domain/usecase/auth_usecase/register_user__use_case.dart';
 import 'package:rent_home/feature/domain/usecase/auth_usecase/reset_password_use_case.dart';
 import 'package:rent_home/feature/domain/usecase/auth_usecase/validate_token_use_case.dart';
+import 'package:rent_home/feature/presentation/bloc/detail_bloc/detail_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/drawer_page/drawer_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/home_bloc/home_bloc.dart';
@@ -42,6 +43,7 @@ void init() {
   sl.registerFactory(
       () => HomeBloc(houseRepository: sl(), storageService: sl()));
   sl.registerFactory(() => LogOutBloc(useCase: sl.call()));
+  sl.registerFactory(() => DetailBloc());
 
   ///UseCase
   sl.registerLazySingleton(() => ForgotPasswordUseCase(sl()));

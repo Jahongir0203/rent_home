@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                       ],
                     ).paddingOnly(left: 20.w)
                   : state is HomeFailureState
-                      ? const AppCircularProgressIndicator()
+                      ?  Text(state.failure,style: const TextStyle(color: Colors.blue,fontSize: 30,fontWeight: FontWeight.w600),)
                       : Shimmer.fromColors(
                           baseColor: AppColors.baseColor.shade300,
                           highlightColor: AppColors.highlightColor.shade100,
