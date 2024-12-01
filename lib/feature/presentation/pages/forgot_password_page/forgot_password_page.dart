@@ -33,43 +33,48 @@ class ForgotPasswordPage extends StatelessWidget {
         bloc: bloc,
         builder: (context, state) {
           return Scaffold(
-              body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Lottie.asset(AppLotties.forgotPassword),
-              Text(
-                AppLocaleKeys.forgotPassword,
-                style: Theme.of(context).textTheme.labelLarge,
-              ).paddingOnly(top: 40.h, bottom: 10.h),
-              Text(
-                AppLocaleKeys.resentInstruction,
-                style: Theme.of(context).textTheme.headlineSmall,
-                textAlign: TextAlign.center,
-              ),
-              AppTextFormField(
-                      hintText: AppLocaleKeys.enterEmail,
-                      isVisible: false,
-                      error: state is ForgotPasswordErrorState
-                          ? state.email
-                          : null,
-                      controller: bloc.emailController,
-                      keyBoardType: TextInputType.emailAddress,
-                      prefixIcon: Icons.email,
-                      onTab: (e) {})
-                  .paddingOnly(top: 40.h, bottom: 30.h),
-              state is ForgotPasswordLoadingState
-                  ? const AppCircularProgressIndicator()
-                  : AppCustomButton(
-                          onTap: () {
-                            bloc.add(ForgotPasswordLoadedEvent());
-                          },
-                          color: AppColors.mainColor,
-                          text: AppLocaleKeys.resetPassword)
-                      .paddingOnly(bottom: 40.h),
-              const BackToLogIn()
-            ],
-          ).paddingSymmetric(horizontal: 20.w, vertical: 80.h));
+              body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Lottie.asset(
+                  AppLotties.forgotPassword,
+                  height: MediaQuery.of(context).size.height / 3,
+                ),
+                Text(
+                  AppLocaleKeys.forgotPassword,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ).paddingOnly(top: 40.h, bottom: 10.h),
+                Text(
+                  AppLocaleKeys.resentInstruction,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+                AppTextFormField(
+                        hintText: AppLocaleKeys.enterEmail,
+                        isVisible: false,
+                        error: state is ForgotPasswordErrorState
+                            ? state.email
+                            : null,
+                        controller: bloc.emailController,
+                        keyBoardType: TextInputType.emailAddress,
+                        prefixIcon: Icons.email,
+                        onTab: (e) {})
+                    .paddingOnly(top: 40.h, bottom: 30.h),
+                state is ForgotPasswordLoadingState
+                    ? const AppCircularProgressIndicator()
+                    : AppCustomButton(
+                            onTap: () {
+                              bloc.add(ForgotPasswordLoadedEvent());
+                            },
+                            color: AppColors.mainColor,
+                            text: AppLocaleKeys.resetPassword)
+                        .paddingOnly(bottom: 40.h),
+                const BackToLogIn()
+              ],
+            ).paddingSymmetric(horizontal: 20.w, vertical: 80.h),
+          ));
         },
         listener: (BuildContext context, ForgotPasswordState state) {
           if (state is ForgotPasswordSuccessState) {

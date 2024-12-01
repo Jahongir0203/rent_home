@@ -28,7 +28,7 @@ class DioInterceptors extends Interceptor {
   @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
-    if (err.response?.statusCode == 401 ||err.response?.statusCode == 500  ) {
+    if (err.response?.statusCode == 401 || err.response?.statusCode == 500) {
       await refreshToken();
       // Retry the request.
       try {
@@ -46,14 +46,24 @@ class DioInterceptors extends Interceptor {
     print(refreshToken);
     var response = await _dio.post(
       "http://3.120.40.35:5555/auth/refresh-token",
+      options: Options(headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      }),
       data: {
         "refresh_token": refreshToken,
       },
     );
+    print("AAA");
     print(response);
+    if(response.statusCode==500){
+      print("500");
+    }
+
     if (response.statusCode == 200) {
       final result = ResponseRefreshTokenModel.fromJson(response.data);
       print(result);
+      print("AAA");
       await _storageService.putRefreshToken(result.refreshToken);
       await _storageService.putAccessToken(result.accessToken);
       // print(UpdateTokenSuccess.fromJson(response.data).refreshToken);

@@ -44,7 +44,7 @@ class HouseRepositoryImpl extends HouseRepository {
         return Left(ParsingFailure(errorMessage: e.errorMessage));
       }
     } else {
-      return Left(InternetFailure());
+      return const Left(InternetFailure());
     }
   }
 
@@ -63,7 +63,7 @@ class HouseRepositoryImpl extends HouseRepository {
         return Left(ParsingFailure(errorMessage: e.errorMessage));
       }
     } else {
-      return Left(InternetFailure());
+      return const Left(InternetFailure());
     }
   }
 
@@ -104,7 +104,8 @@ class HouseRepositoryImpl extends HouseRepository {
         return Left(ParsingFailure(errorMessage: e.errorMessage));
       }
     } else {
-      return Left(InternetFailure());
+      return const Left(
+          InternetFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 
@@ -125,7 +126,8 @@ class HouseRepositoryImpl extends HouseRepository {
         return Left(ParsingFailure(errorMessage: e.errorMessage));
       }
     } else {
-      return Left(InternetFailure());
+      return const Left(
+          InternetFailure(errorMessage: AppLocaleKeys.noInternet));
     }
   }
 }

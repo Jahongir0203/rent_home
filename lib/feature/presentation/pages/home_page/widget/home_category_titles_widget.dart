@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
@@ -6,13 +5,17 @@ import 'package:rent_home/core/extentions/padding_extension.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/theme/app_colors.dart';
 
-class CategoryPartWidget extends StatelessWidget {
+class CategoryPartWidget extends StatefulWidget {
   const CategoryPartWidget({
     super.key,
-    required this.selectedIndex,
   });
 
-  final int selectedIndex;
+  @override
+  State<CategoryPartWidget> createState() => _CategoryPartWidgetState();
+}
+
+class _CategoryPartWidgetState extends State<CategoryPartWidget> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +28,29 @@ class CategoryPartWidget extends StatelessWidget {
         itemCount: listCategory.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
             splashColor: AppColors.grey83.withOpacity(0.3),
             borderRadius: BorderRadius.circular(10.r),
             child: Ink(
                 height: 34.h,
                 decoration: BoxDecoration(
-                  color: selectedIndex == index ? null : AppColors.fillColor,
+                  color: selectedIndex == index
+                      ? null
+                      : AppColors.fillColor,
                   borderRadius: BorderRadius.circular(10.r),
                   gradient: selectedIndex == index
                       ? const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      AppColors.gradient1,
-                      AppColors.gradient2,
-                    ],
-                  )
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            AppColors.gradient1,
+                            AppColors.gradient2,
+                          ],
+                        )
                       : null,
                 ),
                 child: Text(

@@ -33,9 +33,9 @@ class StorageService {
     await _box.put(_StorageKeys.savedHouse, houses);
   }
 
-  Future<List<HouseTypeModel>> getSavedHouses() async {
+  Future<List<HouseTypeModel>?> getSavedHouses() async {
     return await _box
-        .get(_StorageKeys.savedHouse, defaultValue: [HouseTypeModel()]);
+        .get(_StorageKeys.savedHouse, defaultValue: null);
   }
 
   Future<String?> getUserId() async {

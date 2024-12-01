@@ -25,7 +25,6 @@ class HomePage extends StatelessWidget {
 
   final bloc = sl<HomeBloc>();
   final storageService = sl<StorageService>();
-  final int selectedIndex = 0;
   String? currentLocation;
 
   void getCurrentLocation() async {
@@ -68,7 +67,13 @@ class HomePage extends StatelessWidget {
                       ],
                     ).paddingOnly(left: 20.w)
                   : state is HomeFailureState
-                      ?  Text(state.failure,style: const TextStyle(color: Colors.blue,fontSize: 30,fontWeight: FontWeight.w600),)
+                      ? Text(
+                          state.failure,
+                          style: const TextStyle(
+                              color: Colors.blue,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600),
+                        )
                       : Shimmer.fromColors(
                           baseColor: AppColors.baseColor.shade300,
                           highlightColor: AppColors.highlightColor.shade100,
@@ -85,7 +90,12 @@ class HomePage extends StatelessWidget {
                 state is HomeSuccessState
                     ? IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.notifications_none),
+                        icon: Badge.count(
+                          count: 2,
+                          alignment: Alignment.topRight,
+                          padding: EdgeInsets.only(bottom: 4.r),
+                          child: const Icon(Icons.notifications_none),
+                        ),
                       ).paddingOnly(right: 20.w)
                     : state is HomeLoadingState
                         ? ShimmerContainer(h: 24.r, w: 24.r, r: 10.r)
@@ -108,8 +118,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             SearchAddressWidget(bloc: bloc),
-            CategoryPartWidget(selectedIndex: selectedIndex)
-                .paddingOnly(top: 20.h),
+            CategoryPartWidget().paddingOnly(top: 20.h),
             NearFromYouWidget().paddingOnly(top: 27.h, bottom: 24.h),
             NearFromYouImagesWidget(
               houses: houses,

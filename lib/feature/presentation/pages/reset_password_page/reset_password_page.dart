@@ -50,73 +50,77 @@ class ResetPasswordPage extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Lottie.asset(AppLotties.resetPassword),
-                Text(
-                  AppLocaleKeys.resetPassword,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ).paddingOnly(top: 40.h, bottom: 30.h),
-                AppTextFormField(
-                  hintText: AppLocaleKeys.enterCode,
-                  isVisible: false,
-                  controller: bloc.codeController,
-                  keyBoardType: TextInputType.number,
-                  prefixIcon: Icons.numbers,
-                  onTab: (e) {},
-                  textInputFormatter: bloc.maskFormatter,
-                  error:
-                      state is ResetPasswordInputErrorState ? state.code : null,
-                ).paddingOnly(bottom: 20.h),
-                AppTextFormField(
-                  hintText: AppLocaleKeys.enterEmail,
-                  isVisible: false,
-                  error: state is ResetPasswordInputErrorState
-                      ? state.email
-                      : null,
-                  controller: bloc.emailController,
-                  keyBoardType: TextInputType.number,
-                  prefixIcon: Icons.email,
-                  onTab: (e) {},
-                ).paddingOnly(bottom: 20.h),
-                AppTextFormField(
-                  hintText: AppLocaleKeys.enterNewPassword,
-                  isVisible: state is ResetPasswordVisibilityState
-                      ? state.isVisible
-                      : true,
-                  error: state is ResetPasswordInputErrorState
-                      ? state.newPassword
-                      : null,
-                  canCopy: false,
-                  controller: bloc.newPasswordController,
-                  keyBoardType: TextInputType.visiblePassword,
-                  prefixIcon: Icons.lock,
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        bloc.add(ResetPasswordVisibilityEvent(
-                            isVisible: state is ResetPasswordVisibilityState
-                                ? !state.isVisible
-                                : false));
-                      },
-                      icon: state is ResetPasswordVisibilityState
-                          ? state.isVisible
-                              ? const Icon(Icons.visibility_off)
-                              : const Icon(Icons.visibility)
-                          : const Icon(Icons.visibility_off)),
-                  onTab: (e) {},
-                ).paddingOnly(bottom: 40.h),
-                AppCustomButton(
-                        onTap: () {
-                          bloc.add(ResetPasswordLoadedEvent());
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Lottie.asset(AppLotties.resetPassword,
+                      height: MediaQuery.of(context).size.height /3),
+                  Text(
+                    AppLocaleKeys.resetPassword,
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ).paddingOnly(top: 40.h, bottom: 30.h),
+                  AppTextFormField(
+                    hintText: AppLocaleKeys.enterCode,
+                    isVisible: false,
+                    controller: bloc.codeController,
+                    keyBoardType: TextInputType.number,
+                    prefixIcon: Icons.numbers,
+                    onTab: (e) {},
+                    textInputFormatter: bloc.maskFormatter,
+                    error: state is ResetPasswordInputErrorState
+                        ? state.code
+                        : null,
+                  ).paddingOnly(bottom: 20.h),
+                  AppTextFormField(
+                    hintText: AppLocaleKeys.enterEmail,
+                    isVisible: false,
+                    error: state is ResetPasswordInputErrorState
+                        ? state.email
+                        : null,
+                    controller: bloc.emailController,
+                    keyBoardType: TextInputType.emailAddress,
+                    prefixIcon: Icons.email,
+                    onTab: (e) {},
+                  ).paddingOnly(bottom: 20.h),
+                  AppTextFormField(
+                    hintText: AppLocaleKeys.enterNewPassword,
+                    isVisible: state is ResetPasswordVisibilityState
+                        ? state.isVisible
+                        : true,
+                    error: state is ResetPasswordInputErrorState
+                        ? state.newPassword
+                        : null,
+                    canCopy: false,
+                    controller: bloc.newPasswordController,
+                    keyBoardType: TextInputType.visiblePassword,
+                    prefixIcon: Icons.lock,
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          bloc.add(ResetPasswordVisibilityEvent(
+                              isVisible: state is ResetPasswordVisibilityState
+                                  ? !state.isVisible
+                                  : false));
                         },
-                        color: AppColors.mainColor,
-                        text: AppLocaleKeys.resetPassword)
-                    .paddingOnly(bottom: 40.h),
-                const BackToLogIn()
-              ],
-            ).paddingSymmetric(horizontal: 20.w, vertical: 40.h),
+                        icon: state is ResetPasswordVisibilityState
+                            ? state.isVisible
+                                ? const Icon(Icons.visibility_off)
+                                : const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
+                    onTab: (e) {},
+                  ).paddingOnly(bottom: 40.h),
+                  AppCustomButton(
+                          onTap: () {
+                            bloc.add(ResetPasswordLoadedEvent());
+                          },
+                          color: AppColors.mainColor,
+                          text: AppLocaleKeys.resetPassword)
+                      .paddingOnly(bottom: 40.h),
+                  const BackToLogIn()
+                ],
+              ).paddingSymmetric(horizontal: 20.w, vertical: 40.h),
+            ),
           );
         },
       ),

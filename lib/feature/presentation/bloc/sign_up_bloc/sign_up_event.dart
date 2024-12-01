@@ -9,9 +9,15 @@ class SignUpLoadedEvent extends SignUpEvent {
   SignUpLoadedEvent({required this.requestRegisterModel});
 }
 
-class SignUpPasswordEvent extends SignUpEvent{
+class SignUpPasswordEvent extends SignUpEvent {
   final bool isVisible1;
   final bool isVisible2;
 
-  SignUpPasswordEvent({required this.isVisible1,required this.isVisible2});
+  SignUpPasswordEvent({required this.isVisible1, required this.isVisible2});
+}
+
+class SignUpSuccessEvent extends SignUpEvent {
+  final ResponseRegisterModel responseRegisterModel;
+
+  SignUpSuccessEvent({required this.responseRegisterModel});
 }

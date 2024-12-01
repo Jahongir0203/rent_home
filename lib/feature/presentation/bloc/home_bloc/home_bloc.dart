@@ -10,7 +10,6 @@ import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/core/utils/location_permission.dart';
 import 'package:rent_home/feature/data/models/house/get_houses_response.dart';
 import 'package:rent_home/feature/data/models/position_model.dart';
-import 'package:rent_home/feature/data/repository/house_repository_impl/house_repository_impl.dart';
 import 'package:rent_home/feature/domain/repository/house_repository/house_repository.dart';
 
 part 'home_event.dart';
@@ -59,10 +58,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       } on DioException catch (e) {
         emit(HomeFailureState(failure: e.error.toString()));
       } on ServerException catch (e) {
-        print(e);
+        emit(HomeFailureState(failure: e.toString()));
       } catch (e) {
-        print("e");
-        print(e);
+        emit(HomeFailureState(failure: e.toString()));
       }
     });
   }

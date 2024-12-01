@@ -7,14 +7,27 @@ import '../../../../../core/utils/app_locale_keys.dart';
 
 class RentNowWidget extends StatelessWidget {
   const RentNowWidget({
-    super.key, required this.cost,
+    super.key,
+    required this.cost,
   });
-final String? cost;
+
+  final String? cost;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 100.h,
-      color: AppColors.white,
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.grey83,
+            blurRadius: 5,
+            blurStyle: BlurStyle.outer,
+            offset: Offset(2, 2),
+          ),
+        ],
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,10 +44,10 @@ final String? cost;
                     .copyWith(fontSize: 12.sp, color: AppColors.grey85),
               ).paddingOnly(bottom: 8.h),
               Text(
-                cost?? 'Rp. 2.500.000.000 / Year',
+                cost ?? 'Rp. 2.500.000.000 / Year',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: AppColors.leadingColor,
-                ),
+                      color: AppColors.leadingColor,
+                    ),
               ),
             ],
           ),
@@ -56,8 +69,8 @@ final String? cost;
               child: Text(
                 AppLocaleKeys.rentNow,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                      fontWeight: FontWeight.w600,
+                    ),
               ).paddingSymmetric(horizontal: 24.w, vertical: 12.h),
             ),
           )

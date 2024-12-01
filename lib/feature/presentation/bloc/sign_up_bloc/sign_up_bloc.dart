@@ -130,7 +130,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             },
             (r) async {
               await storageService.putUserId(r.id);
-              emit(SignUpSuccessState(responseRegisterModel: r));
+              add(SignUpSuccessEvent(responseRegisterModel: r));
             },
           );
         } on DioException catch (e) {
@@ -153,6 +153,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpPasswordEvent>((event, emit) {
       emit(SignUpVisibilityState(
           isVisible1: event.isVisible1, isVisible2: event.isVisible2));
+    });
+    on<SignUpSuccessEvent>((event, emit) {
+      emit(SignUpSuccessState(
+          responseRegisterModel: event.responseRegisterModel));
     });
   }
 }
