@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theme/app_colors.dart';
@@ -10,11 +11,13 @@ class DescriptionTitleWidget extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    return Text(
-      AppLocaleKeys.description,
-      style: Theme.of(context).textTheme.labelSmall!.copyWith(
-            color: AppColors.leadingColor,
-          ),
+    return FadeInLeft(
+      child: Text(
+        AppLocaleKeys.description,
+        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+              color: AppColors.leadingColor,
+            ),
+      ),
     );
   }
 }

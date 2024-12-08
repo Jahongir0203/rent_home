@@ -8,9 +8,14 @@ final class HomeInitialState extends HomeState {}
 final class HomeSuccessState extends HomeState {
   final GetHousesResponse housesResponse;
   final String? currentLocation;
-
-  HomeSuccessState(
-      {required this.housesResponse, required this.currentLocation});
+  final int count;
+  final bool isFirstTime;
+  HomeSuccessState({
+    required this.housesResponse,
+    required this.currentLocation,
+    required this.count,
+    required this.isFirstTime
+  });
 }
 
 final class HomeLoadingState extends HomeState {}

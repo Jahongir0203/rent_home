@@ -22,7 +22,9 @@ import 'package:rent_home/feature/presentation/bloc/forgot_password_bloc/forgot_
 import 'package:rent_home/feature/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/log_In_bloc/log_in_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/log_out_bloc/log_out_bloc.dart';
+import 'package:rent_home/feature/presentation/bloc/notification_bloc/notification_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/reset_password_bloc/reset_password_bloc.dart';
+import 'package:rent_home/feature/presentation/bloc/saved_bloc/saved_bloc.dart';
 import 'package:rent_home/feature/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
 
 import 'feature/presentation/bloc/splash_bloc/splash_bloc.dart';
@@ -44,6 +46,12 @@ void init() {
       () => HomeBloc(houseRepository: sl(), storageService: sl()));
   sl.registerFactory(() => LogOutBloc(useCase: sl.call()));
   sl.registerFactory(() => DetailBloc());
+  sl.registerFactory(
+    () => SavedBloc(),
+  );
+  sl.registerFactory(
+    () => NotificationBloc(),
+  );
 
   ///UseCase
   sl.registerLazySingleton(() => ForgotPasswordUseCase(sl()));

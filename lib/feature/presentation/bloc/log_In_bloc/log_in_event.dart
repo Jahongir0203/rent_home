@@ -17,6 +17,8 @@ class LogInVisibilityEvent extends LogInEvent {
 
 class LogInSuccessEvent extends LogInEvent {
   final ResponseLogInModel responseLogInModel;
+  final bool isFirstTime;
 
-  LogInSuccessEvent({required this.responseLogInModel});
+  LogInSuccessEvent(
+      {required this.responseLogInModel, required this.isFirstTime});
 }

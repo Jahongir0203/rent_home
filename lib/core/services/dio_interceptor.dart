@@ -72,6 +72,7 @@ class DioInterceptors extends Interceptor {
 
       return response;
     }
+    return null;
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {

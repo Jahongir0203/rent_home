@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
@@ -47,45 +48,55 @@ class OwnerInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundColor: AppColors.grey83,
-          radius: 20.r,
-          child: const Icon(
-            Icons.person,
-            color: AppColors.white,
+        ZoomIn(
+          child: CircleAvatar(
+            backgroundColor: AppColors.grey83,
+            radius: 20.r,
+            child: const Icon(
+              Icons.person,
+              color: AppColors.white,
+            ),
           ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Garrey Allen",
-              style: Theme.of(context)
-                  .textTheme
-                  .labelSmall!
-                  .copyWith(color: AppColors.leadingColor),
-            ).paddingOnly(bottom: 4.h),
-            Text(
-              "Owner",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(color: AppColors.grey85, fontSize: 12.sp),
+            BounceInDown( 
+              child: Text(
+                "Garrey Allen",
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall!
+                    .copyWith(color: AppColors.leadingColor),
+              ).paddingOnly(bottom: 4.h),
+            ),
+            BounceInUp(
+              child: Text(
+                "Owner",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(color: AppColors.grey85, fontSize: 12.sp),
+              ),
             ),
           ],
         ).paddingOnly(left: 16.w),
-        OwnerContactInfo(
-          onTap: () {
-            makePhoneCall("+998930836460");
-          },
-          svg: AppSvg.icPhoneLight,
-        ).paddingOnly(left: 122.w, right: 16.w),
-        OwnerContactInfo(
-          onTap: () {
-            openTelegramProfile("Jahongir0203");
-          },
-          svg: AppSvg.icMessage,
+        ZoomIn(
+          child: OwnerContactInfo(
+            onTap: () {
+              makePhoneCall("+998930836460");
+            },
+            svg: AppSvg.icPhoneLight,
+          ).paddingOnly(left: 122.w, right: 16.w),
+        ),
+        ZoomIn(
+          child: OwnerContactInfo(
+            onTap: () {
+              openTelegramProfile("Jahongir0203");
+            },
+            svg: AppSvg.icMessage,
+          ),
         ),
       ],
     );

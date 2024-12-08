@@ -31,7 +31,8 @@ class LogOutBloc extends Bloc<LogOutEvent, LogOutState> {
                   ),
                 ), (r) async {
           await storageService.clearAll();
-          return emit(LogOutSuccessState());
+          // emit(LogOutSuccessState());
+           add(LogOutSuccessEvent());
         });
       } on DioException catch (e) {
         print(e);
@@ -43,6 +44,9 @@ class LogOutBloc extends Bloc<LogOutEvent, LogOutState> {
           LogOutFailureState(failure: e.toString()),
         );
       }
+    });
+    on<LogOutSuccessEvent>((event, emit) {
+      emit(LogOutSuccessState());
     });
   }
 }

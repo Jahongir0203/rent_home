@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
@@ -35,32 +36,61 @@ class _CategoryPartWidgetState extends State<CategoryPartWidget> {
             },
             splashColor: AppColors.grey83.withOpacity(0.3),
             borderRadius: BorderRadius.circular(10.r),
-            child: Ink(
-                height: 34.h,
-                decoration: BoxDecoration(
-                  color: selectedIndex == index
-                      ? null
-                      : AppColors.fillColor,
-                  borderRadius: BorderRadius.circular(10.r),
-                  gradient: selectedIndex == index
-                      ? const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            AppColors.gradient1,
-                            AppColors.gradient2,
-                          ],
-                        )
-                      : null,
-                ),
-                child: Text(
-                  listCategory[index],
-                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                      color: selectedIndex == index
-                          ? AppColors.white
-                          : AppColors.grey85,
-                      fontSize: 12.sp),
-                ).paddingSymmetric(horizontal: 16.w, vertical: 10.h)),
+            child: index%2==1? BounceInUp(
+              child: Ink(
+                  height: 34.h,
+                  decoration: BoxDecoration(
+                    color: selectedIndex == index
+                        ? null
+                        : AppColors.fillColor,
+                    borderRadius: BorderRadius.circular(10.r),
+                    gradient: selectedIndex == index
+                        ? const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppColors.gradient1,
+                        AppColors.gradient2,
+                      ],
+                    )
+                        : null,
+                  ),
+                  child: Text(
+                    listCategory[index],
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                        color: selectedIndex == index
+                            ? AppColors.white
+                            : AppColors.grey85,
+                        fontSize: 12.sp),
+                  ).paddingSymmetric(horizontal: 16.w, vertical: 10.h)),
+            ):BounceInDown(
+              child: Ink(
+                  height: 34.h,
+                  decoration: BoxDecoration(
+                    color: selectedIndex == index
+                        ? null
+                        : AppColors.fillColor,
+                    borderRadius: BorderRadius.circular(10.r),
+                    gradient: selectedIndex == index
+                        ? const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppColors.gradient1,
+                        AppColors.gradient2,
+                      ],
+                    )
+                        : null,
+                  ),
+                  child: Text(
+                    listCategory[index],
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                        color: selectedIndex == index
+                            ? AppColors.white
+                            : AppColors.grey85,
+                        fontSize: 12.sp),
+                  ).paddingSymmetric(horizontal: 16.w, vertical: 10.h)),
+            ),
           );
         },
         separatorBuilder: (BuildContext context, int index) {

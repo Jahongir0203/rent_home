@@ -46,7 +46,7 @@ class AuthRepositoryImpl extends AuthRepository {
             requestLogInModel: requestLogInModel);
         return Right(logInRes);
       } on ServerException {
-        return Left(ServerFailure());
+        return const Left(ServerFailure());
       }
     } else {
       return const Left(OtherFailure(errorMessage: AppLocaleKeys.noInternet));

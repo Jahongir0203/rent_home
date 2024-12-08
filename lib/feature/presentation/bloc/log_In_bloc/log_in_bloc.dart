@@ -1,13 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:meta/meta.dart';
 import 'package:rent_home/core/error/failure.dart';
 import 'package:rent_home/core/services/storage_service.dart';
 import 'package:rent_home/core/usecases/usecases.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
-import 'package:rent_home/core/utils/location_permission.dart';
 import 'package:rent_home/feature/data/models/auth/request_log_In_model.dart';
 import 'package:rent_home/feature/data/models/auth/response_log_in_model.dart';
 import 'package:rent_home/feature/domain/usecase/auth_usecase/log_in_use_case.dart';
@@ -58,14 +55,18 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
             (r) async {
               print("AccessToken:${r.accessToken}");
               print("RefreshToken:${r.refreshToken}");
-
+              bool isFirstTime = await storageService.getFirstTime();
+              await storageService.putFirstTime(true);
               try {
                 await storageService.putAccessToken(r.accessToken);
                 await storageService.putRefreshToken(r.refreshToken);
+                await storageService
+                    .putLogInTime(DateTime.now().toString().substring(0, 19));
               } catch (e) {
                 print(e);
               }
-              add(LogInSuccessEvent(responseLogInModel: r));
+              add(LogInSuccessEvent(
+                  responseLogInModel: r, isFirstTime: isFirstTime));
             },
           );
         } on DioException catch (e) {
@@ -91,7 +92,9 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     });
 
     on<LogInSuccessEvent>((event, emit) {
-      emit(LogInSuccessState(responseLogInModel: event.responseLogInModel));
+      emit(LogInSuccessState(
+          responseLogInModel: event.responseLogInModel,
+          isFirstTime: true));
     });
   }
 }

@@ -14,3 +14,4 @@ final class LogOutFailureState extends LogOutState {
 
   LogOutFailureState({required this.failure});
 }
+

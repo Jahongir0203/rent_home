@@ -8,7 +8,6 @@ import 'package:rent_home/feature/presentation/pages/saved_page/saved_page.dart'
 
 import '../../feature/presentation/pages/message_page/message_page.dart';
 import '../../feature/presentation/pages/settings_page/settings_page.dart';
-import '../router/app_routes.dart';
 
 sealed class Constants {
   static const authUrl = "http://3.120.40.35:5555/auth";
@@ -49,7 +48,7 @@ const listTitle = [
   "Kabinet",
   "Yaqin-atrofda",
   "Saqlangan",
-  "Bildirishnima",
+  "Bildirishnoma",
   "Xabar",
   "Sozlamalar",
   "Yordam",
@@ -57,11 +56,11 @@ const listTitle = [
 ];
 
 var listPages = [
-  HomePage(),
+  const HomePage(),
   const ProfilePage(),
   const NearbyPage(),
   const SavedPage(),
-  const NotificationPage(),
+  NotificationPage(),
   const MessagePage(),
   const SettingsPage(),
   const HelpPage(),

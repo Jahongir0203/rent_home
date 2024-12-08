@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 import 'package:rent_home/core/usecases/usecases.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/models/auth/response_forgot_password_model.dart';

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
@@ -23,44 +24,48 @@ class SearchAddressWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: AppTextFormField(
-              hintText: AppLocaleKeys.searchHintTitle,
-              isVisible: false,
-              controller: bloc.searchController,
-              keyBoardType: TextInputType.text,
-              prefixIcon: Icons.search,
-              onTab: (e) {}),
+          child: BounceInLeft(
+            child: AppTextFormField(
+                hintText: AppLocaleKeys.searchHintTitle,
+                isVisible: false,
+                controller: bloc.searchController,
+                keyBoardType: TextInputType.text,
+                prefixIcon: Icons.search,
+                onTab: (e) {}),
+          ),
         ),
-        Material(
-          color: Colors.transparent,
-          child: Ink(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              gradient: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  AppColors.gradient1,
-                  AppColors.gradient2,
-                ],
+        BounceInRight(
+          child: Material(
+            color: Colors.transparent,
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    AppColors.gradient1,
+                    AppColors.gradient2,
+                  ],
+                ),
               ),
-            ),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.settings);
-              },
-              splashColor: AppColors.grey83.withOpacity(0.3),
-              borderRadius: BorderRadius.all(
-                Radius.circular(10.r),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.settings);
+                },
+                splashColor: AppColors.grey83.withOpacity(0.3),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.r),
+                ),
+                child: SizedBox(
+                  height: 48.r,
+                  width: 48.r,
+                  child: AppWidgets.imageSvg(path: AppSvg.icSettings)
+                      .paddingAll(12.r),
+                ),
               ),
-              child: SizedBox(
-                height: 48.r,
-                width: 48.r,
-                child: AppWidgets.imageSvg(path: AppSvg.icSettings)
-                    .paddingAll(12.r),
-              ),
-            ),
-          ).paddingOnly(left: 8.w),
+            ).paddingOnly(left: 8.w),
+          ),
         )
       ],
     );

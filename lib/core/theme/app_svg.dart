@@ -15,4 +15,7 @@ class AppSvg {
   static const icMessage = 'assets/svg/ic_message.svg';
   static const icPhoneLight = 'assets/svg/ic_phone_light.svg';
   static const icSettings = 'assets/svg/ic_settings.svg';
+  static const icNotification = "assets/svg/notification.svg";
+  static const icSettingsError = 'assets/svg/ic_error.svg';
+
 }

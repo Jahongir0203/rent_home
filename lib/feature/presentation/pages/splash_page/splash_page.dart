@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +7,6 @@ import 'package:rent_home/core/theme/app_colors.dart';
 import 'package:rent_home/core/theme/app_lotties.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/presentation/bloc/splash_bloc/splash_bloc.dart';
-import 'package:rent_home/feature/presentation/pages/drawer_page/drawer_page.dart';
-import 'package:rent_home/feature/presentation/pages/log_in_page/log_in_page.dart';
 import 'package:rent_home/injection_container.dart';
 
 import '../../../../core/router/app_routes.dart';
@@ -41,10 +40,12 @@ class SplashPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Lottie.asset(AppLotties.home),
-                  Text(
-                    AppLocaleKeys.appName,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                    textAlign: TextAlign.center,
+                  ElasticInUp(
+                    child: Text(
+                      AppLocaleKeys.appName,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),

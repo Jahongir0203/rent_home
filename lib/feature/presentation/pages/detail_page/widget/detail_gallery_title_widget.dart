@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theme/app_colors.dart';
@@ -10,10 +11,12 @@ class GalleryTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      AppLocaleKeys.gallery,
-      style: Theme.of(context).textTheme.labelSmall!.copyWith(
-        color: AppColors.leadingColor,
+    return BounceInLeft(
+      child: Text(
+        AppLocaleKeys.gallery,
+        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+          color: AppColors.leadingColor,
+        ),
       ),
     );
   }

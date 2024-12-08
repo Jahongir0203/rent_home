@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/router/app_routes.dart';
@@ -24,16 +25,18 @@ class LogInHaveNotAccountWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RichText(
-            text: TextSpan(
-                text: AppLocaleKeys.registerYet,
-                style: Theme.of(context).textTheme.headlineSmall,
-                children: [
-                  TextSpan(
-                    text: AppLocaleKeys.signUp,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  )
-                ]),
+          BounceInUp(
+            child: RichText(
+              text: TextSpan(
+                  text: AppLocaleKeys.registerYet,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  children: [
+                    TextSpan(
+                      text: AppLocaleKeys.signUp,
+                      style: Theme.of(context).textTheme.labelSmall,
+                    )
+                  ]),
+            ),
           ),
         ],
       ),

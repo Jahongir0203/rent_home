@@ -9,8 +9,8 @@ final class LogInLoadingState extends LogInState {}
 
 final class LogInSuccessState extends LogInState {
   final ResponseLogInModel responseLogInModel;
-
-  LogInSuccessState({required this.responseLogInModel});
+  final bool isFirstTime;
+  LogInSuccessState({required this.responseLogInModel, required this.isFirstTime});
 }
 
 final class LogInFailureState extends LogInState {

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,21 +15,25 @@ class BestForYouTitleWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          AppLocaleKeys.bestForYou,
-          style: Theme.of(context)
-              .textTheme
-              .labelSmall!
-              .copyWith(color: AppColors.leadingColor),
-        ),
-        TextButton(
-          onPressed: () {},
+        BounceInLeft(
           child: Text(
-            AppLocaleKeys.seeMore,
+            AppLocaleKeys.bestForYou,
             style: Theme.of(context)
                 .textTheme
-                .headlineSmall!
-                .copyWith(fontSize: 12.sp, color: AppColors.grey83),
+                .labelSmall!
+                .copyWith(color: AppColors.leadingColor),
+          ),
+        ),
+        BounceInRight(
+          child: TextButton(
+            onPressed: () {},
+            child: Text(
+              AppLocaleKeys.seeMore,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(fontSize: 12.sp, color: AppColors.grey83),
+            ),
           ),
         ),
       ],

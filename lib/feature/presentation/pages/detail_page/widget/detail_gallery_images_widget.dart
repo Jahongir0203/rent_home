@@ -1,7 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theme/app_png.dart';
 
 class GalleryImagesWidget extends StatelessWidget {
   GalleryImagesWidget({
@@ -24,14 +24,16 @@ class GalleryImagesWidget extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return Container(
-              height: 72.r,
-              width: 72.r,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(images[index]),
+            return ZoomIn(
+              child: Container(
+                height: 72.r,
+                width: 72.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(images[index]),
+                  ),
                 ),
               ),
             );

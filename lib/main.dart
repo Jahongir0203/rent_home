@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
 import 'package:rent_home/feature/data/models/house_model.dart';
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 0.8),
+          data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(0.8)),
           child: child!,
         ),
         debugShowCheckedModeBanner: false,

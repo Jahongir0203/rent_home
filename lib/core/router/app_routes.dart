@@ -49,21 +49,21 @@ class AppRoutes {
 
       case Routes.home:
         return MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => const HomePage(),
         );
 
       case Routes.profile:
         return MaterialPageRoute(
-          builder: (context) => ProfilePage(),
+          builder: (context) => const ProfilePage(),
         );
 
       case Routes.nearby:
         return MaterialPageRoute(
-          builder: (context) => NearbyPage(),
+          builder: (context) => const NearbyPage(),
         );
       case Routes.saved:
         return MaterialPageRoute(
-          builder: (context) => SavedPage(),
+          builder: (context) => const SavedPage(),
         );
 
       case Routes.notification:
@@ -73,17 +73,17 @@ class AppRoutes {
 
       case Routes.message:
         return MaterialPageRoute(
-          builder: (context) => MessagePage(),
+          builder: (context) => const MessagePage(),
         );
 
       case Routes.settings:
         return MaterialPageRoute(
-          builder: (context) => SettingsPage(),
+          builder: (context) => const SettingsPage(),
         );
 
       case Routes.help:
         return MaterialPageRoute(
-          builder: (context) => HelpPage(),
+          builder: (context) => const HelpPage(),
         );
       case Routes.resetPassword:
         return MaterialPageRoute(

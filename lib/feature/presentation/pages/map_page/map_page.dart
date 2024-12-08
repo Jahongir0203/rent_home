@@ -36,12 +36,12 @@ class MapPage extends StatelessWidget {
               target: LatLng(49.9, 61.1),
             ),
             markers: {
-              Marker(
-                  markerId: const MarkerId('1'),
+              const Marker(
+                  markerId: MarkerId('1'),
                   position: LatLng( 49.9,
                        69.1),
                   icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: const InfoWindow(title: 'Marker', snippet: '*'),
+                  infoWindow: InfoWindow(title: 'Marker', snippet: '*'),
                   visible: true),
             },
           ),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
 
 import '../../../core/theme/app_colors.dart';
-import 'app_widgets.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({

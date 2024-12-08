@@ -23,7 +23,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Marker marker = Marker(
-      markerId: MarkerId('1'),
+      markerId: const MarkerId('1'),
       position:
           LatLng(house.latitude?.toDouble() ?? 69.0, house.longitude ?? 69.0),
     );

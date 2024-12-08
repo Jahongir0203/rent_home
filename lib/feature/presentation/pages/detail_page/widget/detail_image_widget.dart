@@ -1,13 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rent_home/core/extentions/padding_extension.dart';
-import 'package:rent_home/core/services/storage_service.dart';
-import 'package:rent_home/feature/data/models/house_model.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/app_png.dart';
 import '../../../../../core/theme/app_svg.dart';
 import '../../../../../injection_container.dart';
 import '../../../../data/models/house/get_houses_response.dart';
@@ -32,15 +30,17 @@ class ImageWidget extends StatelessWidget {
         builder: (context, state) {
           return Stack(
             children: [
-              Container(
-                height: 304.h,
-                width: 100.sw,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.r),
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                        "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg"),
-                    fit: BoxFit.fill,
+              ZoomIn(
+                child: Container(
+                  height: 304.h,
+                  width: 100.sw,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    image: const DecorationImage(
+                      image: NetworkImage(
+                          "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg"),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -51,49 +51,53 @@ class ImageWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 34.r,
-                        height: 34.r,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.withOpacity(
-                              0.7), // Semi-transparent grey background
-                        ),
-                        child: IconButton(
-                          alignment: Alignment.center,
-                          icon: Icon(Icons.arrow_back_ios_new,
-                              size: 20.r, color: AppColors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+                      BounceInLeft(
+                        child: Container(
+                          width: 34.r,
+                          height: 34.r,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey.withOpacity(
+                                0.7), // Semi-transparent grey background
+                          ),
+                          child: IconButton(
+                            alignment: Alignment.center,
+                            icon: Icon(Icons.arrow_back_ios_new,
+                                size: 20.r, color: AppColors.white),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                       ),
-                      Container(
-                        width: 34.r,
-                        height: 34.r,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.withOpacity(
-                              0.7), // Semi-transparent grey background
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                              state is DetailUnSavedState
-                                  ? Icons.bookmark_border
-                                  : Icons.bookmark,
-                              size: 20.r,
-                              color: state is DetailUnSavedState
-                                  ? AppColors.white
-                                  : AppColors.mainColor),
-                          onPressed: () {
-                            if (state is DetailSavedState) {
-                              bloc.add(DetailUnSavedEvent(houseId: house.id!));
-                            }
+                      BounceInRight(
+                        child: Container(
+                          width: 34.r,
+                          height: 34.r,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey.withOpacity(
+                                0.7), // Semi-transparent grey background
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                                state is DetailUnSavedState
+                                    ? Icons.bookmark_border
+                                    : Icons.bookmark,
+                                size: 20.r,
+                                color: state is DetailUnSavedState
+                                    ? AppColors.white
+                                    : AppColors.mainColor),
+                            onPressed: () {
+                              if (state is DetailSavedState) {
+                                bloc.add(DetailUnSavedEvent(houseId: house.id!));
+                              }
 
-                            if (state is DetailUnSavedState) {
-                              bloc.add(DetailSavedEvent(house: house));
-                            }
-                          },
+                              if (state is DetailUnSavedState) {
+                                bloc.add(DetailSavedEvent(house: house));
+                              }
+                            },
+                          ),
                         ),
                       )
                     ],

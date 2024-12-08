@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 
 part 'house_model.g.dart'; // This is the generated part file, it will be created by build_runner.
-
 @HiveType(typeId: 0)
 class HouseTypeModel extends HiveObject {
   @HiveField(0)
@@ -83,5 +82,54 @@ class HouseTypeModel extends HiveObject {
     this.roommateCount,
   });
 
-// You can remove the `fromJson` and `toJson` methods because Hive handles serialization and deserialization automatically
+  /// Factory constructor to create an instance from a JSON map
+  factory HouseTypeModel.fromJson(Map<String, dynamic> json) {
+    return HouseTypeModel(
+      id: json['id'] as String?,
+      ownerId: json['ownerId'] as String?,
+      address: json['address'] as String?,
+      price: json['price'] as int?,
+      propertyType: json['propertyType'] as String?,
+      bedrooms: json['bedrooms'] as int?,
+      bathrooms: json['bathrooms'] as int?,
+      squareFootage: json['squareFootage'] as int?,
+      listingStatus: json['listingStatus'] as String?,
+      description: json['description'] as String?,
+      leaseTerms: json['leaseTerms'] as String?,
+      leaseDuration: json['leaseDuration'] as int?,
+      topStatus: json['topStatus'] as bool?,
+      imageUrl: (json['imageUrl'] as List<dynamic>?)?.cast<String>(),
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      latitude: json['latitude'] as num?,
+      longitude: (json['longitude'] as num?)?.toDouble(),
+      roommateCount: json['roommateCount'] as int?,
+    );
+  }
+
+  /// Converts the instance to a JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'ownerId': ownerId,
+      'address': address,
+      'price': price,
+      'propertyType': propertyType,
+      'bedrooms': bedrooms,
+      'bathrooms': bathrooms,
+      'squareFootage': squareFootage,
+      'listingStatus': listingStatus,
+      'description': description,
+      'leaseTerms': leaseTerms,
+      'leaseDuration': leaseDuration,
+      'topStatus': topStatus,
+      'imageUrl': imageUrl,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'latitude': latitude,
+      'longitude': longitude,
+      'roommateCount': roommateCount,
+    };
+  }
 }
+

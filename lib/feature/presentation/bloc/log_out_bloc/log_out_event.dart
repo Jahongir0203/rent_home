@@ -4,3 +4,4 @@ part of 'log_out_bloc.dart';
 sealed class LogOutEvent {}
 
 final class LogOutLoadedEvent extends LogOutEvent {}
+final class LogOutSuccessEvent extends LogOutEvent {}

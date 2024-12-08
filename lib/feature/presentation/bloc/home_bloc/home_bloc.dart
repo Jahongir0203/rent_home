@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:meta/meta.dart';
 import 'package:rent_home/core/error/exceptions.dart';
 import 'package:rent_home/core/services/storage_service.dart';
 import 'package:rent_home/core/utils/app_locale_keys.dart';
@@ -25,7 +24,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : super(HomeInitialState()) {
     on<HomeLoadedEvent>((event, emit) async {
       emit(HomeLoadingState());
+      bool isFirstTime = await storageService.getFirstTime();
       var currentLocation = await storageService.getCurrentLocation();
+      List list = await storageService.getNotificationsIndex();
+      int count = notifications.length - list.length;
       final String currentLoc;
       if (currentLocation == null) {
         final Position position = await determinePosition();
@@ -34,11 +36,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             position.latitude, position.longitude);
         PositionModel? a = await storageService.getCurrentPosition();
         if (a != null) {
-          print('Lat;${a!.latitude} Long;${a.longitude}');
+          print('Lat;${a.latitude} Long;${a.longitude}');
         }
-        if (placemarks[0].name != null) {
-          currentLocation = placemarks[0].name!;
-          await storageService.putCurrentLocation(placemarks[0].name!);
+
+        if (placemarks[0].locality != null) {
+          currentLocation = placemarks[0].locality!;
+          await storageService.putCurrentLocation(placemarks[0].locality!);
         }
       } else {
         currentLocation = await storageService.getCurrentLocation();
@@ -52,7 +55,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           },
           (right) {
             emit(HomeSuccessState(
-                housesResponse: right, currentLocation: currentLocation));
+                housesResponse: right,
+                currentLocation: currentLocation,
+                isFirstTime: isFirstTime,
+                count: count));
           },
         );
       } on DioException catch (e) {
@@ -62,6 +68,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       } catch (e) {
         emit(HomeFailureState(failure: e.toString()));
       }
+    });
+
+    on<HomeSuccessEvent>((event, emit) async {
+      await storageService.putFirstTime(event.isFirstTime);
+      emit(HomeSuccessState(
+          housesResponse: event.housesResponse,
+          currentLocation: event.currentLocation,
+          count: event.count,
+          isFirstTime: event.isFirstTime));
     });
   }
 }

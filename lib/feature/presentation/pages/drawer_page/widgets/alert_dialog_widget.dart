@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rent_home/core/extentions/padding_extension.dart';
 import 'package:rent_home/core/router/app_routes.dart';
 import 'package:rent_home/feature/presentation/bloc/log_out_bloc/log_out_bloc.dart';
 import 'package:rent_home/feature/presentation/widgets/app_toast.dart';
@@ -34,14 +35,14 @@ class AlertDialogWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.warning_rounded,
-                  size: 40.sp,
+                  size: 60.sp,
                   color: AppColors.red,
                 ),
-                SizedBox(height: 10.h),
+                SizedBox(height: 30.h),
                 Text(
                   AppLocaleKeys.wantToLogOut,
                   style: TextStyle(
-                      fontSize: 27.sp,
+                      fontSize: 25.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Raleway"),
                 ),
@@ -51,9 +52,11 @@ class AlertDialogWidget extends StatelessWidget {
               AppLocaleKeys.willBeLostAllData,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w400,
                   color: AppColors.black54),
+            ).paddingOnly(
+              bottom: 15.h
             ),
             actions: <Widget>[
               TextButton(
@@ -62,7 +65,7 @@ class AlertDialogWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.grey, fontSize: 20.sp),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                 },
               ),
               ElevatedButton(
@@ -94,6 +97,7 @@ class AlertDialogWidget extends StatelessWidget {
         },
         listener: (BuildContext context, LogOutState state) {
           if (state is LogOutSuccessState) {
+            Navigator.pop(context);
             fToast.showToast(
               child:
                   const AppSuccessToast(message: AppLocaleKeys.logOutSuccess),

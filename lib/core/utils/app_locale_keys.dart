@@ -35,9 +35,9 @@ class AppLocaleKeys {
   static const errorOperator = 'Bunday aloqa operatori mavjud emas';
   static const passwordNotSame = "Parol bir xil emas";
   static const dublicateEmail =
-      '''error registering user: pq: duplicate key value violates unique constraint \"users_email_key\"''';
+      '''error registering user: pq: duplicate key value violates unique constraint "users_email_key"''';
   static const dublicatePhoneNumber =
-      '''error registering user: pq: duplicate key value violates unique constraint \"users_phone_number_key\"''';
+      '''error registering user: pq: duplicate key value violates unique constraint "users_phone_number_key"''';
   static const alreadyUsedPhoneNumber =
       "Ushbu telefon raqamdan ro'yhatdan o'tilgan";
   static const alreadyUsedEmail = "Ushbu emaildan ro'yhatdan o'tilgan";
@@ -67,4 +67,45 @@ class AppLocaleKeys {
   static const logOutSuccess = "Profildan muvaffaqiyatli chiqildi";
   static const user = 'User';
   static const unexpectedError = "Unexpected Error";
+  static const saved = 'Saqlanganlar';
+  static const empty = "Hech narsa mavjud emas";
+  static const message = "Xabarlar";
+  static const noMessage = "Xabarlar mavjud emas";
+  static const profile = "Shaxsiy kabinet";
+  static const edit = "Profilni tahrirlash";
+  static const share = "Baham ko'rish";
+
+  static const orders = "Buyurtmalarim";
+  static const commit = "Sharhlarim";
+  static const card = "Maning kartalarim";
+  static const myLoc = 'Maning manzillarim';
+  static const notification = "Bildirishnoma";
+  static const settings = "Sozlamalar";
+  static const help = "Yordam";
+  static const customError =
+      "Noqulaylik uchun uzur so'raymiz, ushbu bo'limda texnik ishlar olib borilayotganligi uchun hozirda ushbu xizmatimiz mavjud emas";
+  static const lorem = '''
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  
+  ''';
+
+  static const not1 =
+      "Tabriklaymiz! Siz muvaffaqiyatli ro'yxatdan o'tdingiz. Ilovamizdan foydalanayotganingiz uchun tashakkur! 🎉";
+  static const not2 =
+      "Bugun uy-joylar bozorida nima yangilik? Sizning ehtiyojlaringizga mos yangi uylarni kashf qiling va ijara uchun birinchi qadamni qo'ying! 🏠🔑";
+
+  static const swipeRight =
+      "Ekranni o'ngga surish orqali siz ilovada mavjud barcha xizmatlar haqida to'liqroq ma'lumot olishingiz mumkin";
+
+  static const introduction='Ilovadan foydalanish haqida';
+   static const continue2="Davom ettirish";
 }
+
+// Buyurtmalarim
+// Sharhlarim
+// Uzum Nasiya muddatli to'lovi
+// Uzum Avto
+// Sotuvchi bolish
+// Topshirish punktini ochish
+// Uzum karta
+
+List notifications = [AppLocaleKeys.not1, AppLocaleKeys.not2];
