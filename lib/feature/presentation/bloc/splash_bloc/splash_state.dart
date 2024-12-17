@@ -5,4 +5,8 @@ sealed class SplashState {}
 
 final class SplashInitialState extends SplashState {}
 final class SplashLoadingState extends SplashState {}
-final class SplashSuccessState extends SplashState {}
+final class SplashSuccessState extends SplashState {
+  final String? accessToken;
+
+  SplashSuccessState({required this.accessToken});
+}

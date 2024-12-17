@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 
 sealed class AppUtils {
   AppUtils._();
@@ -18,6 +16,5 @@ sealed class AppUtils {
 
   /// Divider
     static const  kDivider = Divider(
-    color: AppColors.otpColor,
   );
 }

@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/theme/app_colors.dart';
 import 'app_widgets.dart';
 
 class OtpAppBarWidget extends StatelessWidget {
@@ -28,7 +27,6 @@ class OtpAppBarWidget extends StatelessWidget {
         },
         icon: Icon(
           Icons.arrow_back_ios,
-          color: AppColors.blue,
           size: 14.h,
         ),
       ),
@@ -37,7 +35,6 @@ class OtpAppBarWidget extends StatelessWidget {
         text: tr(title!),
         fontSize: 17.sp,
         fontWeight: FontWeight.normal,
-        color: AppColors.dark,
       )
           : null,
       actions: actionsTxt != null
@@ -48,7 +45,6 @@ class OtpAppBarWidget extends StatelessWidget {
             text: actionsTxt!,
             fontSize: 17.sp,
             fontWeight: FontWeight.w600,
-            color: AppColors.blue,
           ),
         ),
       ]

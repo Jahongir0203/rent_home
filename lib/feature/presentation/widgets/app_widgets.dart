@@ -24,7 +24,7 @@ Widget _baseText({
 }) {
   TextStyle textStyle = TextStyle(
     fontSize: fontSize ?? 16.sp,
-    color: color ?? AppColors.darkText,
+    color: color ?? AppColors.dark,
     fontWeight: fontWeight,
     height: height,
     fontFamily: "avenirnextcyr-light",
