@@ -5,17 +5,17 @@ import 'app_colors.dart';
 sealed class AppTextStyle {
   const AppTextStyle._();
 
-  static const w600H20 = TextStyle(
-      fontSize: 20,
-      fontFamily: "avenirnextcyr",
-      color: AppColors.dark,
-      fontWeight: FontWeight.w600);
+  static const w400S12 = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontFamily: "Raleway",
+    color: AppColors.grey83,
+    fontSize: 12,
+  );
 
-
-  static const w600H18 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    fontFamily: "avenirnextcyr-light",
-    color: AppColors.dark,
+  static const w500S20 = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontFamily: "Raleway",
+    color: AppColors.leadingColor,
+    fontSize: 20,
   );
 }
